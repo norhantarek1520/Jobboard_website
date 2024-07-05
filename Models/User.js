@@ -25,11 +25,11 @@ class User {
             throw error; // Re-throw for potential error handling
         }
     }
-    static async create(userObj) {
+    static async create(name, email, password) {
         try {
             const result = await this.query(
-                `INSERT INTO users SET ?`,
-                userObj
+                `INSERT INTO users SET name = ?, email = ?, password = ?`,
+                name, email, password
             );
             return result.affectedRows === 1;
         } catch (error) {
