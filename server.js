@@ -11,9 +11,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("uploads")); // Serve static files from uploads
 
-
-// Test Data base 
-const {connectDb}  = require('./Database/connect_db')
 // Test HTTP Req 
 app.post('/test',(req,res)=>{
     console.log("This is Jobboard app , who are you ? ")
@@ -21,6 +18,10 @@ app.post('/test',(req,res)=>{
     res.json({"name": req.body.name})
 })
 
+app.use('/categories',require('./Routers/CategoryRouter'))
+app.use('/companies',require('./Routers/CompanyRouter'))
+// app.use('',require('./Routers/AuthRouter'))
+// app.use('', require('./Routers/UserRouter'))
 
 // Start the server
 app.listen(process.env.PORT, () => {console.log(`Server running on port: ${process.env.PORT }`);});

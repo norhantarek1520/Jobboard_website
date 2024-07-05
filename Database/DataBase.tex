@@ -3,11 +3,11 @@ USE jobboard;
 CREATE TABLE users(
     gender ENUM('male', 'female', 'other'),
     role ENUM('Admin', 'User', 'Owner'),
-    id BINARY(16) PRIMARY KEY,
+    id int AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     email VARCHAR(50) NOT NULL UNIQUE,
-    password_hash VARCHAR(255) NOT NULL,
-    token VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+   
     address VARCHAR(255),
     education VARCHAR(255),
     job_title VARCHAR(100),
@@ -18,7 +18,7 @@ CREATE TABLE users(
     updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 CREATE TABLE categories(
-    id BINARY(16) PRIMARY KEY,
+    id int AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(70) UNIQUE NOT NULL,
     image varchar(255),
     description TEXT,
@@ -26,7 +26,7 @@ CREATE TABLE categories(
     updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 CREATE TABLE jobs(
-    id BINARY(16) PRIMARY KEY,
+    id int AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(100) NOT NULL,
     job_type ENUM('Full Time', 'Part Time', 'Contract', 'Freelance', 'Internship'),
     owner VARCHAR(255),
@@ -37,7 +37,8 @@ CREATE TABLE jobs(
     deadline DATETIME NOT NULL,
     Qualifications VARCHAR(255),
     Responsibility VARCHAR(255),
-    vacancy INT DEFAULT 1, salary DOUBLE, category_id BINARY(16) NOT NULL,
+    vacancy INT DEFAULT 1, salary DOUBLE,
+    category_id INT NOT NULL,
     FOREIGN KEY(category_id) REFERENCES categories(id),
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -45,8 +46,8 @@ CREATE TABLE jobs(
 CREATE TABLE jobapplications(
         id INT AUTO_INCREMENT PRIMARY KEY,
         status ENUM('pending', 'rejected', 'accepted') DEFAULT 'pending',
-        userID BINARY(16) NOT NULL,
-        jobID BINARY(16) NOT NULL,
+        userID INT NOT NULL,
+        jobID INT NOT NULL,
         cv BLOB NOT NULL,
         portfolio VARCHAR(255),
         appliedOn DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -56,14 +57,14 @@ CREATE TABLE jobapplications(
         updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 CREATE TABLE company_info(
-        id BINARY(16) PRIMARY KEY,
+        id int AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
         website VARCHAR(255),
         logo BLOB,
         description TEXT,
         location VARCHAR(255),
         industry VARCHAR(255),
-        owner_user_id BINARY(16) DEFAULT NULL,
+        owner_user_id INT ,
         created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
         updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
         FOREIGN KEY(owner_user_id) REFERENCES users(id)-- Optional foreign key constraint
