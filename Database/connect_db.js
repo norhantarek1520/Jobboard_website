@@ -4,10 +4,10 @@ const mysql = require('mysql');
 const connectDb = mysql.createConnection({
   host: "localhost",
   user: "root",
-  database: process.env.DATABASENAME
+  database: 'jobboard' //$$$$$^^^ when i uses process.env.DATABASENAME here it make an error !!!!!
 });
 
-connectDb.connect(function (err) {
+connectDb.connect( function (err) {
   if (err) {
     console.error("Error connecting to database:", err);
   } else {

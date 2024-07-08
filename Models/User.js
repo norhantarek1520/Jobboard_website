@@ -37,32 +37,28 @@ class User {
             throw error;
         }
     }
-    static async update(userObj) {
-        try {
-            const result = await this.query(
-                `UPDATE users SET gender = ?, role = ?, name = ?, email = ?, password = ?, address = ?, education = ?, job_title = ?, image = ?, age = ?, phone_number = ? WHERE id = ?`,
-                [
-                    userObj.gender,
-                    userObj.role,
-                    userObj.name,
-                    userObj.email,
-                    userObj.password,
-                    userObj.address,
-                    userObj.education,
-                    userObj.jobTitle,
-                    userObj.image,
-                    userObj.age,
-                    userObj.phoneNumber,
-                    userObj.id
-                ]
-            );
-
-            return result.affectedRows === 1; // Return boolean for success
-        } catch (error) {
-            console.error('Error updating user:', error);
-            throw error; // Re-throw for potential error handling
-        }
+    static async update(updateData, userId) {
+      try {
+        const updateString = Object.keys(updateData)
+          .filter(key => updateData[key] !== undefined) // Filter out undefined values
+          .map(key => `${key} = ?`)
+          .join(', ');
+    
+        const updateValues = Object.values(updateData)
+          .filter(value => value !== undefined); // Filter out undefined values
+    
+        const result = await this.query(
+          `UPDATE users SET ${updateString} WHERE id = ?`,
+          updateValues.concat(userId)
+        );
+    
+        return result.affectedRows === 1;
+      } catch (error) {
+        console.error('Error updating user:', error);
+        throw error; // Re-throw for potential error handling
+      }
     }
+    
     static async delete(userId) {
         try {
             const result = await this.query(`DELETE FROM users WHERE id = ?`, userId);
@@ -83,7 +79,7 @@ class User {
     }
     static async getById(userId) {
         try {
-            const result = await this.query(`SELECT * FROM users WHERE id = ?`, userId);
+            const result = await this.query(`SELECT * FROM users WHERE id = ${userId}`);
             return result[0] || null;
         } catch (error) {
             console.error('Error getting user by ID:', error);

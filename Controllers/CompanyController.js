@@ -1,6 +1,8 @@
 const {Company} = require('../Models/Company')
+const asyncHandler = require('express-async-handler');
+const ApiError = require('../Shared/ApiError');
 class CompanyController{ 
-  static addNewCompany =async (req, res) => {
+  static addNewCompany =  asyncHandler( async (req, res) => {
     try {
       const newCompany = new Company(
         null,
@@ -23,8 +25,8 @@ class CompanyController{
       console.error('Error creating company:', error);
       res.status(500).json({ message: 'Internal server error' });
     }
-  }
-  static updateCompany = async (req, res) => {
+  })
+  static updateCompany =  asyncHandler( async (req, res) => {
     const companyId = req.params.companyId;
 
     try {
@@ -48,8 +50,8 @@ class CompanyController{
       console.error('Error updating company:', error);
       res.status(500).json({ message: 'Internal server error' });
     }
-  }
-  static deleteCompany = async (req, res) => {
+  })
+  static deleteCompany =  asyncHandler( async (req, res) => {
     const companyId = req.params.companyId;
 
     try {
@@ -63,8 +65,8 @@ class CompanyController{
       console.error('Error deleting company:', error);
       res.status(500).json({ message: 'Internal server error' });
     }
-  }
-  static getAllcompanies = async (req, res) => {
+  })
+  static getAllcompanies =  asyncHandler( async (req, res) => {
     try {
       const companies = await Company.getAll();
       res.status(200).json(companies);
@@ -72,8 +74,8 @@ class CompanyController{
       console.error('Error getting all companies:', error);
       res.status(500).json({ message: 'Internal server error' });
     }
-  }
-  static getSpecificCompany =async (req, res) => {
+  })
+  static getSpecificCompany = asyncHandler( async (req, res) => {
   const companyId = req.params.companyId;
 
   try {
@@ -87,7 +89,7 @@ class CompanyController{
     console.error('Error getting company:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
-}
+})
 }
 
 

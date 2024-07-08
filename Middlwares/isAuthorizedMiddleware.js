@@ -1,38 +1,31 @@
-const User = require("../Models/User");
 const asyncHandler = require('express-async-handler');
-const jwt = require('jsonwebtoken');
+const {getUserId } = require('../Shared/SharedFunctions')
 const ApiError = require('../Shared/ApiError');
+const { User } = require('../Models/User');
 
  exports.isAuthorized = asyncHandler(async (req, res, next) => {
     // 1) Check if token exist, if exist get
-    let token;
+    let authToken;
     if ( req.headers.authorization && req.headers.authorization.startsWith('Bearer') ) {
-      token = req.headers.authorization.split(' ')[1]; 
+      authToken = req.headers.authorization.split(' ')[1]; 
     }
-    
-    if (!token) {
+    if (!authToken) {
       return next( new ApiError('You are not login, Please login to get access this route',401) );
     }
   
     // 2) Verify token (no change happens, expired token)
-    const decoded = jwt.verify(token, process.env.JWT_KEY); 
+  
     // 3) Check if user exists
-    const currentUser = await User.findById(decoded.userId);
-    if (!currentUser) {
-      return next( new ApiError( 'The user that belong to this token does no longer exist', 401) );
+    const userId = getUserId(authToken) ;
+    const user = await User.getById(userId.userId) ;
+    if (!user) {
+      return res.status(401).json({ message: 'User not found with the provided token ,  You are not authorized' });
     }
-  
-    // 4) Check if user change his password after token created
-    if (currentUser.passwordChangedAt) 
-    {
-      const passChangedTimestamp = parseInt( currentUser.passwordChangedAt.getTime() / 1000,  10);
-      // Password changed after token created (Error)
-      if (passChangedTimestamp > decoded.iat) {
-        return next( new ApiError( 'User recently changed his password. please login again..', 401 ) );
-      }
-    }
-  
-    // req.user = currentUser;
     next();
+
+    // 4) Check if user change his password after token created
+  
+    
+   
   });
   

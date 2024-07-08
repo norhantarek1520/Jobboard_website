@@ -1,9 +1,10 @@
 const {Category} = require('../Models/Category')
-const uuid = require('uuid'); // Example UUID library
+const asyncHandler = require('express-async-handler');
+const ApiError = require('../Shared/ApiError');
 const crypto = require('crypto');
 class CategoryController{
   
-  static getAllCategories = async (req, res) => {
+  static getAllCategories = asyncHandler (async (req, res) => {
     try {
       const categories = await Category.getAll();
       res.status(200).json(categories);
@@ -11,8 +12,8 @@ class CategoryController{
       console.error('Error getting all categories:', error);
      res.status(500).json({ message: 'Internal server error' , Error : error});
     }
-  }
-  static getSpecificCategory = async (req, res) => {
+  })
+  static getSpecificCategory = asyncHandler (async (req, res) => {
     const categoryId = req.params.categoryId;
   
     try {
@@ -26,8 +27,8 @@ class CategoryController{
       console.error('Error getting category:', error);
      res.status(500).json({ message: 'Internal server error' , Error : error});
     }
-  }
-  static deleteCategory = async (req, res) => {
+  })
+  static deleteCategory = asyncHandler (async (req, res) => {
     const categoryId = req.params.categoryId;
   
     try {
@@ -41,8 +42,8 @@ class CategoryController{
       console.error('Error deleting category:', error);
      res.status(500).json({ message: 'Internal server error' , Error : error});
     }
-  }
-  static updateCategory = async (req, res) => {
+  })
+  static updateCategory = asyncHandler (async (req, res) => {
     const categoryId = req.params.categoryId;
   
     try {
@@ -62,8 +63,8 @@ class CategoryController{
       console.error('Error updating category:', error);
       res.status(500).json({ message: 'Internal server error' , Error : error});
     }
-  }
-  static addNewCategory = async (req, res) => {
+  })
+  static addNewCategory = asyncHandler (async (req, res) => {
     try {
       //const id = uuid.v4(); // Generate a UUID
       
@@ -79,10 +80,10 @@ class CategoryController{
       console.error('Error creating category:', error);
       res.status(500).json({ message: 'Internal server error' , Error : error });
     }
-  }
-  static getJobsInSpecificCategory =async()=>{
+  })
+  static getJobsInSpecificCategory = asyncHandler (async()=>{
     res.json("hi")
-  }
+  })
 
 }
 module.exports = CategoryController

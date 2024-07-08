@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt');
 
 // ================================ user functions =========================================
 exports.getUserId = (token)=>{
-  
     const decoded = jwt.verify(token, process.env.JWT_KEY);
     return decoded.userId ;
 }

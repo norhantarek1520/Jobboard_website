@@ -10,7 +10,7 @@
     "express-async-handler": "^1.2.0",
     "express-flash": "^0.0.2",
     "express-form-data": "^2.0.22",
-    "express-validator": "^7.0.1",
+    "express-validator": "^7.1.0",
     "html": "^1.0.0",
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
