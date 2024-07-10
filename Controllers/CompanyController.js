@@ -2,7 +2,8 @@ const {Company} = require('../Models/Company')
 const asyncHandler = require('express-async-handler');
 const ApiError = require('../Shared/ApiError');
 class CompanyController{ 
-  static addNewCompany =  asyncHandler( async (req, res) => {
+  
+  static addNewCompany =  asyncHandler( async (req, res,next) => {
     try {
       const newCompany = new Company(
         null,
@@ -22,11 +23,10 @@ class CompanyController{
         res.status(500).json({ message: 'Error creating company' });
       }
     } catch (error) {
-      console.error('Error creating company:', error);
-      res.status(500).json({ message: 'Internal server error' });
+      return next(new ApiError(`Internal server error  , The error is : ${error}`, 500));
     }
   })
-  static updateCompany =  asyncHandler( async (req, res) => {
+  static updateCompany =  asyncHandler( async (req, res,next) => {
     const companyId = req.params.companyId;
 
     try {
@@ -38,20 +38,20 @@ class CompanyController{
         location: req.body.location,
         industry: req.body.industry,
         owner_user_id: req.body.owner_user_id,
+        id:companyId
       };
 
-      const updated = await Company.Update(companyToUpdate, companyId);
+      const updated = await Company.Update(companyToUpdate);
       if (updated) {
         res.status(200).json({ message: 'Company updated successfully' });
       } else {
         res.status(404).json({ message: 'Company not found' });
       }
     } catch (error) {
-      console.error('Error updating company:', error);
-      res.status(500).json({ message: 'Internal server error' });
+      return next(new ApiError(`Internal server error  , The error is : ${error}`, 500));
     }
   })
-  static deleteCompany =  asyncHandler( async (req, res) => {
+  static deleteCompany =  asyncHandler( async (req, res,next) => {
     const companyId = req.params.companyId;
 
     try {
@@ -62,32 +62,29 @@ class CompanyController{
         res.status(404).json({ message: 'Company not found' });
       }
     } catch (error) {
-      console.error('Error deleting company:', error);
-      res.status(500).json({ message: 'Internal server error' });
+      return next(new ApiError(`Internal server error  , The error is : ${error}`, 500));
     }
   })
-  static getAllcompanies =  asyncHandler( async (req, res) => {
+  static getAllcompanies =  asyncHandler( async (req, res,next) => {
     try {
       const companies = await Company.getAll();
       res.status(200).json(companies);
     } catch (error) {
-      console.error('Error getting all companies:', error);
-      res.status(500).json({ message: 'Internal server error' });
+      return next(new ApiError(`Internal server error  , The error is : ${error}`, 500));
     }
   })
-  static getSpecificCompany = asyncHandler( async (req, res) => {
+  static getSpecificCompany = asyncHandler( async (req, res,next) => {
   const companyId = req.params.companyId;
 
   try {
-    const company = await Company.getOnecompany(companyId);
+    const company = await Company.getById(companyId);
     if (company) {
       res.status(200).json(company);
     } else {
       res.status(404).json({ message: 'Company not found' });
     }
   } catch (error) {
-    console.error('Error getting company:', error);
-    res.status(500).json({ message: 'Internal server error' });
+    return next(new ApiError(`Internal server error  , The error is : ${error}`, 500));
   }
 })
 }

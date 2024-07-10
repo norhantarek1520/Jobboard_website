@@ -33,8 +33,15 @@ class Company {
     }
     static async Update(company_obj) {
         try {
-            const result = await this.query(`UPDATE company_info SET  name = ? , website = ? , logo = ? , description = ? , location = ? , industry = ? , owner_user_id = ?  where  id=? `,
-                [company_obj.name, company_obj.website, company_obj.logo, company_obj.description, company_obj.location, company_obj.industry, company_obj.owner_user_id, company_obj.id])
+            const result = await this.query(`UPDATE company_info SET  
+                name = '${company_obj.name}' , 
+                website = '${company_obj.website}' , 
+                logo = '${company_obj.logo}' ,
+                 description = '${company_obj.description}' , 
+                 location = '${company_obj.location}' , 
+                 industry = '${company_obj.industry}' ,
+                  owner_user_id = ${company_obj.owner_user_id} 
+                   where  id=${company_obj.id} `)
             if (result.affectedRows === 1) { return true; } else { return false; }
         } catch (error) {
             console.log("Error in Updateing company " + error);
@@ -62,7 +69,7 @@ class Company {
         }
 
     }
-    static async getOnecompany(company_id) {
+    static async getById(company_id) {
         try {
             const result = await this.query(`SELECT * FROM company_info where id =${company_id}`);
             return result[0] || []

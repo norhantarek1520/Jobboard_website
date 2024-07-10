@@ -1,73 +1,70 @@
 const asyncHandler = require('express-async-handler');
 const ApiError = require('../Shared/ApiError') 
 const { User } = require('../Models/User')
-//  return next(new ApiError('JWT configuration missing. Please set JWT_KEY and JWT_EXPIRE_TIME environment variables.', 500));
 
 class UserController {
 
-  static getAllUsers = asyncHandler(async (req, res) => {
-    const users = await User.getAll();
-    res.json(users)
+  static getAllUsers = asyncHandler(async (req, res,next) => {
+    try {
+      const users = await User.getAll();
+      res.json(users)
+    } catch (error) {
+      return next(new ApiError(`Internal server error  , The error is : ${error}`, 500));
+    }
+   
   })
-  static getUserById = asyncHandler(async (req, res) => {
+  static getUserById = asyncHandler(async (req, res,next) => {
     const userId = req.params.id; // Assuming user ID is in the URL parameter
     try {
       const user = await User.getById(userId);
       if (!user) {
-        return res.status(404).json({ message: 'User not found' });
+        return next(new ApiError('User not found', 404));
+       
       }
       return res.json(user); // Return user data as JSON
     } catch (error) {
-      console.error('Error getting user:', error);
-      return res.status(500).json({ message: 'Internal server error' }); // Handle errors generically
+      return next(new ApiError(`Internal server error  , The error is : ${error}`, 500));
     }
   })
-
-  static  updateUser = asyncHandler(async (req, res) => {
-    const userId = req.params.id; // Assuming user ID is in the URL parameter
-    const updateData = req.body; // Assuming user data is sent in the request body
+  static  updateUser = asyncHandler(async (req, res,next) => {
+    const userId = req.params.id;
+    const user_data = req.body; 
   
     try {
-      const user = new User(updateData); // Create a User object from request body (validation can be added here)
-  
-      const updated = await User.update({
-        gender: user.gender === undefined ? null : user.gender,
-        role: user.role,
-        name: user.name,
-        email: user.email,
-        password: user.password, // Consider hashing password before update
-        address: user.address,
-        education: user.education,
-        jobTitle: user.jobTitle,
-        image: user.image,
-        age: user.age,
-        phoneNumber: user.phoneNumber,
-      }, userId);
-  
+      const userobj = {    
+        gender: user_data.gender === undefined ? null : user_data.gender,
+        name: user_data.name,
+        address: user_data.address,
+        education: user_data.education,
+        job_title: user_data.job_title,
+        image: user_data.image,
+        age: user_data.age,
+        phone_number: user_data.phone_number,
+        id : userId}
+      const updated = await User.update(userobj);
+    
       if (updated) {
         return res.json({ message: 'User updated successfully' });
       } else {
-        return res.status(400).json({ message: 'Failed to update user' });
+        return next(new ApiError('Failed to update user', 400));
+       
       }
     } catch (error) {
-      console.error('Error updating user:', error);
-      return res.status(500).json({ message: 'Internal server error' }); // Generic error for unexpected issues
+      return next(new ApiError(`Internal server error  , The error is : ${error}`, 500)); 
     }
   });
-  
-  
-  static deleteUser = asyncHandler(async (req, res) => {
+  static deleteUser = asyncHandler(async (req, res,next) => {
     const userId = req.params.id; // Assuming user ID is in the URL parameter
     try {
       const deleted = await User.delete(userId);
       if (!deleted) {
-        return res.status(404).json({ message: 'User not found' });
+        return next(new ApiError('User not found', 404));
+        
       }
       return res.json({ message: 'User deleted successfully' });
     } catch (error) {
-      console.error('Error deleting user:', error);
-      return res.status(500).json({ message: 'Internal server error' }); // Handle errors generically
-    }
+      return next(new ApiError(`Internal server error  , The error is : ${error}`, 500));
+       }
   })
 }
 module.exports = { UserController }

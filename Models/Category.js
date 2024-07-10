@@ -16,7 +16,6 @@ class Category {
           throw error; 
         }
       }
-
     static async create(category_obj) {
         try {
             const result = await this.query(`insert into categories set ?`, category_obj)
@@ -27,10 +26,13 @@ class Category {
         }
 
     }
-    static async Update(category_obj) {
+    static async update(category_obj) {
         try {
-            const result = await this.query(`UPDATE categories SET title = ? ,description = ? , image = ? where  id=? `,
-                [category_obj.title, category_obj.description, category_obj.image, category_obj.id])
+            const result = await this.query(`UPDATE categories SET
+                 title = '${category_obj.title}' ,
+                 description = '${category_obj.description}' , 
+                 image = '${category_obj.image}' 
+                 where  id=${category_obj.id} `)
             if (result.affectedRows === 1) { return true; } else { return false; }
         } catch (error) {
             console.log("Error in Updateing cageory " + error);
@@ -58,7 +60,7 @@ class Category {
         }
 
     }
-    static async getOneCategory(category_id) {
+    static async getById(category_id) {
         try {
             const result = await this.query(`SELECT * FROM categories where id =${category_id}`);
             return result[0] || []
@@ -78,6 +80,7 @@ class Category {
 
         } catch (error) { console.error(error); throw error; }
 
+ 
     }
 }
 module.exports = {Category}

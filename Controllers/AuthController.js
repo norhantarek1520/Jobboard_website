@@ -1,10 +1,9 @@
 const {User} = require('../Models/User');
 const bcrypt = require('bcrypt');
-const crypto = require('crypto');
 const jwt = require('jsonwebtoken')
 const asyncHandler = require('express-async-handler');
 const ApiError = require('../Shared/ApiError');
-const { sendEmail, createToken, createHashPassword } = require('../Shared/SharedFunctions');
+const {createToken, createHashPassword } = require('../Shared/SharedFunctions');
 
 
 class AuthController {
@@ -54,8 +53,7 @@ class AuthController {
     // 6. (Optional) Send welcome email
   
 
-  });
-  
+  }); 
   static login = asyncHandler(async (req, res, next) => {
     // 1. Get email and password from request body
     const { email, password } = req.body;
@@ -102,9 +100,6 @@ class AuthController {
       res.status(401).json({ message: 'Invalid token' }); // Handle invalid tokens
     }
   });
-  
-
-
 
 }
 module.exports = { AuthController }

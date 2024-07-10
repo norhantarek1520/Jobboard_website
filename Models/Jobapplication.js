@@ -30,9 +30,11 @@ class JobApplication {
   static async update(jobApplicationObj) {
     try {
       const result = await this.query(
-        `UPDATE jobapplications SET status = ?, cv = ?, portfolio = ? WHERE id = ?`,
-        [jobApplicationObj.status, jobApplicationObj.cv, jobApplicationObj.portfolio, jobApplicationObj.id]
-      );
+        `UPDATE jobapplications SET
+         status = '${jobApplicationObj.status}',
+         cv = '${ jobApplicationObj.cv}', 
+         portfolio = '${jobApplicationObj.portfolio}' 
+         WHERE id = ${jobApplicationObj.id}` );
 
       return result.affectedRows === 1; // Return boolean for success
     } catch (error) {

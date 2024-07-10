@@ -2,7 +2,8 @@ const util = require('util');
 const { connectDb } = require('../Database/connect_db'); // Assuming a valid database connection module
 
 class User {
-    constructor(id, gender, role, name, email, password, address = null, education = null, jobTitle = null, image = null, age = null, phoneNumber = null) {
+    
+    constructor(id, gender, role, name, email, password, address = null, education = null, job_title = null, image = null, age = null, phone_number = null) {
         this.id = id;
         this.gender = gender;
         this.role = role;
@@ -11,10 +12,10 @@ class User {
         this.password = password;
         this.address = address;
         this.education = education;
-        this.jobTitle = jobTitle;
+        this.job_title = job_title;
         this.image = image;
         this.age = age;
-        this.phoneNumber = phoneNumber;
+        this.phone_number = phone_number;
     }
     static async query(sql, ...params) {
         const promisifiedQuery = util.promisify(connectDb.query).bind(connectDb);
@@ -37,28 +38,28 @@ class User {
             throw error;
         }
     }
-    static async update(updateData, userId) {
+    static async update(updateData) {
       try {
-        const updateString = Object.keys(updateData)
-          .filter(key => updateData[key] !== undefined) // Filter out undefined values
-          .map(key => `${key} = ?`)
-          .join(', ');
-    
-        const updateValues = Object.values(updateData)
-          .filter(value => value !== undefined); // Filter out undefined values
-    
+      
         const result = await this.query(
-          `UPDATE users SET ${updateString} WHERE id = ?`,
-          updateValues.concat(userId)
-        );
+            `UPDATE users SET  
+            gender = '${updateData.gender}',
+            name = '${updateData.name}', 
+            address = '${updateData.address}' ,
+            education = '${updateData.education}' , 
+            job_title = '${updateData.job_title}' ,
+            image = '${updateData.image }' ,
+            age = '${updateData.age}' , 
+            phone_number = '${updateData.phone_number}'  
+            where id = ${updateData.id}`,
+           )
     
         return result.affectedRows === 1;
       } catch (error) {
         console.error('Error updating user:', error);
         throw error; // Re-throw for potential error handling
       }
-    }
-    
+    }   
     static async delete(userId) {
         try {
             const result = await this.query(`DELETE FROM users WHERE id = ?`, userId);

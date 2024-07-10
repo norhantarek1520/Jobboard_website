@@ -7,8 +7,6 @@ const morgan = require('morgan'); // Morgan is a popular middleware that acts as
 
 const  ApiError = require('./Shared/ApiError');
 const globalError = require('./Middlwares/errorMiddleware');
-const { isAdmin } = require("./Middlwares/isAdminMiddleware");
-const { isAuthorized } = require("./Middlwares/isAuthorizedMiddleware");
 
 // Global middleware
 app.use(cors());
@@ -26,12 +24,8 @@ app.use('/', require('./Routers/AuthRouter'))
 app.use('/categories',require('./Routers/CategoryRouter'))
 app.use('/companies',require('./Routers/CompanyRouter'))
 app.use('/users' ,require('./Routers/UserRouter'))
-
-app.get('/test', isAuthorized,(req,res)=>{
-    res.json("hi")
-})
-
-
+app.use('/jobs' , require('./Routers/JobRouter'))
+app.use('/applications' , require('./Routers/JobApplicationRouter'))
 
 app.all('*', (req, res, next) => { // we use this middleware if the user enter any unknown router 
     next(new ApiError(`Can't find this route: ${req.originalUrl}`, 400)); // Use new keyword

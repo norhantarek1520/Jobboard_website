@@ -4,31 +4,31 @@ const ApiError = require('../Shared/ApiError');
 const crypto = require('crypto');
 class CategoryController{
   
-  static getAllCategories = asyncHandler (async (req, res) => {
+  static getAllCategories = asyncHandler (async (req, res,next) => {
     try {
       const categories = await Category.getAll();
       res.status(200).json(categories);
     } catch (error) {
-      console.error('Error getting all categories:', error);
-     res.status(500).json({ message: 'Internal server error' , Error : error});
+      
+      return next(new ApiError(`Internal server error  , The error is : ${error}`, 500));
     }
   })
-  static getSpecificCategory = asyncHandler (async (req, res) => {
+  static getSpecificCategory = asyncHandler (async (req, res,next) => {
     const categoryId = req.params.categoryId;
   
     try {
-      const category = await Category.getOneCategory(categoryId);
+      const category = await Category.getById(categoryId);
       if (category) {
         res.status(200).json(category);
       } else {
         res.status(404).json({ message: 'Category not found' });
       }
     } catch (error) {
-      console.error('Error getting category:', error);
-     res.status(500).json({ message: 'Internal server error' , Error : error});
+    
+      return next(new ApiError(`Internal server error  , The error is : ${error}`, 500));
     }
   })
-  static deleteCategory = asyncHandler (async (req, res) => {
+  static deleteCategory = asyncHandler (async (req, res,next) => {
     const categoryId = req.params.categoryId;
   
     try {
@@ -39,11 +39,10 @@ class CategoryController{
         res.status(404).json({ message: 'Category not found' });
       }
     } catch (error) {
-      console.error('Error deleting category:', error);
-     res.status(500).json({ message: 'Internal server error' , Error : error});
+      return next(new ApiError(`Internal server error  , The error is : ${error}`, 500));
     }
   })
-  static updateCategory = asyncHandler (async (req, res) => {
+  static updateCategory = asyncHandler (async (req, res,next) => {
     const categoryId = req.params.categoryId;
   
     try {
@@ -51,20 +50,20 @@ class CategoryController{
         title: req.body.title,
         description: req.body.description,
         image: req.body.image,
+        id: categoryId
       };
   
-      const updated = await Category.update(categoryToUpdate, categoryId);
+      const updated = await Category.update(categoryToUpdate);
       if (updated) {
         res.status(200).json({ message: 'Category updated successfully' });
       } else {
         res.status(404).json({ message: 'Category not found' });
       }
     } catch (error) {
-      console.error('Error updating category:', error);
-      res.status(500).json({ message: 'Internal server error' , Error : error});
+      return next(new ApiError(`Internal server error  , The error is : ${error}`, 500));
     }
   })
-  static addNewCategory = asyncHandler (async (req, res) => {
+  static addNewCategory = asyncHandler (async (req, res,next) => {
     try {
       //const id = uuid.v4(); // Generate a UUID
       
@@ -77,12 +76,16 @@ class CategoryController{
         res.status(500).json({ "message": 'Error creating category' , "Error" : created});
       }
     } catch (error) {
-      console.error('Error creating category:', error);
-      res.status(500).json({ message: 'Internal server error' , Error : error });
+      return next(new ApiError(`Internal server error  , The error is : ${error}`, 500));
     }
   })
   static getJobsInSpecificCategory = asyncHandler (async()=>{
-    res.json("hi")
+    try {
+      
+    } catch (error) {
+      return next(new ApiError(`Internal server error  , The error is : ${error}`, 500));
+    }
+   
   })
 
 }
