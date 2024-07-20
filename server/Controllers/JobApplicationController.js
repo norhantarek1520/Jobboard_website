@@ -67,7 +67,7 @@ class JobApplicationController {
   static getAllApplications = asyncHandler(async (req, res,next) => {
     try {
       const applications = await JobApplication.getAll();
-      res.status(200).json(applications);
+      res.status(200).json({applications:applications});
     } 
     catch (error) {return next(new ApiError(`Internal server error  , The error is : ${error}`, 500));}
   });
@@ -84,6 +84,19 @@ class JobApplicationController {
     }
     catch (error) {return next(new ApiError(`Internal server error  , The error is : ${error}`, 500));}
   });
+  static getJobApplicaions = asyncHandler(async (req, res,next) => {
+    try {
+   
+     const applications = JobApplication.getByJobID(req.params.jobId)
+     if (applications) {
+      res.status(200).json({"applications" : applications });
+    } else {
+      res.status(404).json({ message: 'This Job application not found' });
+    }
+    }
+    catch (error) {return next(new ApiError(`Internal server error  , The error is : ${error}`, 500));}
+  });
+
   static getUserApplicaions = asyncHandler(async (req, res,next) => {
     try {
      

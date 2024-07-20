@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; // For navigation
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom'; // For navigation and location
+
 function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation(); 
+
 
   useEffect(() => {
-    const token = localStorage.getItem('token'); // Check for token in localStorage
-    if(token !== null ){
-      setIsLoggedIn(true); // Set isLoggedIn based on token existence
-    }
-    else{setIsLoggedIn(false)}
-    
+    const token = localStorage.getItem('token');
+    const role = localStorage.getItem('role');
+    if (token !== null) {setIsLoggedIn(true); } else {setIsLoggedIn(false);}
+    if(role === "Admin") {setIsAdmin(true)} else{ setIsAdmin(false)}
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('token'); // Remove token from localStorage
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
     setIsLoggedIn(false);
     navigate('/Login'); // Redirect to login page
   };
@@ -31,9 +34,9 @@ function Header() {
                   {/* Your navigation links here */}
                   <div className="col-xl-3 col-lg-2">
                     <div className="logo">
-                       <Link to="/">
+                      <Link to="/">
                         <img src="assets/img/logo.png" alt="" />
-                       </Link>
+                      </Link>
                     </div>
                   </div>
 
@@ -41,17 +44,59 @@ function Header() {
                     <div className="main-menu d-none d-lg-block">
                       <nav>
                         <ul id="navigation">
-                          <li> <Link to="/CatagoryArea">Catagory Area </Link></li>
-                          <li> <Link to="/JobsArea">Jobs Area </Link></li>
-                          <li> <Link to="/CompaniesArea">Companies Area </Link></li>
-                          <li> <Link to="/UserProfile">My profile  </Link></li>
+                          <li>
+                            <Link to="/JobsArea">EXPLORE</Link>
+                          </li>
+                          {isLoggedIn ? (  
+                            <>
+                              <li>
+                                <Link to="/Applications">APPLICATIONS</Link>
+                              </li>
+                              <li>
+                                <Link to="/MySavedJobs">SAVED</Link>
+                              </li>
+                              <li>
+                                <Link to="/UserProfile">My profile</Link>
+                              </li>
+                              <li>
+                                <Link to="/EditUserProfile">Edit Profile</Link>
+                              </li>
+                            </>
+                          ) : null}
                           <li className="nav-item dropdown">
-                            <Link className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">Admin </Link>
-                            <div className="dropdown-menu" aria-labelledby="navbarDropdown" style={{ fontWeight: "bold", color: "#795003", textShadow: "2px 2px 2px rgba(26, 25, 25, 0.3)", fontFamily: "sans-serif" }}>
-                              <Link className="dropdown-item" to ="/JobDashboard">Jobs Dashboard </Link>
-                              <Link className="dropdown-item" to ="/CategroyDashboard">Categroies Dashboard </Link>
-                              <Link className="dropdown-item" to ="/CompanyDashboard">Companies Dashboard </Link>
-                            </div>
+                            {isLoggedIn && isAdmin ? (
+                              <>
+                                <Link
+                                  className="nav-link dropdown-toggle"
+                                  href="#"
+                                  id="navbarDropdown"
+                                  role="button"
+                                  data-toggle="dropdown"
+                                >
+                                  Admin
+                                </Link>
+                                <div
+                                  className="dropdown-menu"
+                                  aria-labelledby="navbarDropdown"
+                                  style={{
+                                    fontWeight: "bold",
+                                    color: "#795003",
+                                    textShadow: "2px 2px 2px rgba(26, 25, 25, 0.3)",
+                                    fontFamily: "sans-serif",
+                                  }}
+                                >
+                                  <Link className="dropdown-item" to="/JobDashboard">
+                                    Jobs Dashboard
+                                  </Link>
+                                  <Link className="dropdown-item" to="/CategroyDashboard">
+                                    Categories Dashboard
+                                  </Link>
+                                  <Link className="dropdown-item" to="/CompanyDashboard">
+                                    Companies Dashboard
+                                  </Link>
+                                </div>
+                              </>
+                            ) : null}
                           </li>
                         </ul>
                       </nav>
@@ -60,14 +105,14 @@ function Header() {
 
                   <div className="col-xl-3 col-lg-3 d-none d-lg-block">
                     <div className="Appointment">
-                      {isLoggedIn == true ? (
+                      {isLoggedIn === true ? (
                         <button className="boxed-btn3" onClick={handleLogout}>
                           Logout
                         </button>
                       ) : (
-                         <Link to="/Login" className="boxed-btn3">
+                        <Link to="/Login" className="boxed-btn3">
                           Log in
-                         </Link>
+                        </Link>
                       )}
                     </div>
                   </div>

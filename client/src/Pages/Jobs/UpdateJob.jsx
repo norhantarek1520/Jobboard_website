@@ -2,51 +2,75 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios'; // Assuming you're using Axios for API calls
 import { useNavigate } from 'react-router-dom'; // For navigation after submission
 
-function PostJob() {
-  const [categories, setCategories] = useState([]);
-  const [Companies, setCompanies] = useState([]); 
+function UpdateJob() {
   const [formData, setFormData] = useState({
     title: '',
     job_type: '',
-    owner: '',
+    owner: '', // Assuming this will be populated based on user information
     experience: '',
     location: '',
-    image: '',
+    image: '', // Will likely need additional logic for handling image upload
     deadline: '',
     qualifications: '',
     responsibility: '',
     vacancy: '',
     salary: '',
-    category_id: ''
+    category_id: '',
   });
+  const [categories, setCategories] = useState([]);
+  const [Companies, setCompanies] = useState([]); // Assuming you have an endpoint for companies
   const [token, setToken] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const navigate = useNavigate();
+
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
+    const jobId = localStorage.getItem('jobId');
     setToken(storedToken);
-
+    const fetchJobDetails = async () => {
+      setIsLoading(true);
+      try {
+        const response = await axios.get(`http://localhost:5001/jobs/${jobId}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setFormData(response.data); // Pre-populate form with existing data
+      } catch (error) {
+        console.error('Error fetching job details:', error);
+        setError(error.message); // Handle errors gracefully
+      } finally {
+        setIsLoading(false);
+      }
+    };
     const fetchCategories = async () => {
       try {
         const response = await axios.get('http://localhost:5001/categories');
-        setCategories(response.data.categories);
+        setCategories(response.data.categories); // Assuming categories are in "categories" key
       } catch (error) {
         console.error('Error fetching categories:', error);
-        window.alert(`Error fetching categories: ${error}`);
-      }
-    };  const fetchCompanies = async () => {
-      try {
-        const response = await axios.get('http://localhost:5001/companies/');
-        setCompanies(response.data.companies);
-      } catch (error) {
-        console.error(`Error fetching Companies: ${error}`);
-        window.alert(`Error fetching Companies: ${error}`);
+        // Handle category fetching errors (optional)
       }
     };
-    fetchCompanies();
-    fetchCategories();
-  }, []);
+    const fetchCompanies = async () => { // Assuming you have an endpoint for companies
+      try {
+        const response = await axios.get('http://localhost:5001/companies'); // Replace with your endpoint
+        setCompanies(response.data.companies); // Assuming companies are in "companies" key
+      } catch (error) {
+        console.error('Error fetching companies:', error);
+        // Handle company fetching errors (optional)
+      }
+    };
+
+    // Fetch data in parallel using Promise.all or separate effects
+    Promise.all([fetchJobDetails(), fetchCategories(), fetchCompanies()])
+      .catch((error) => console.error('Error fetching data:', error));
+  }, []); // Run effects only once on component mount
+
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -56,37 +80,27 @@ function PostJob() {
     }
 
     try {
-      const response = await axios.post('http://localhost:5001/jobs',
-        formData,
-        { headers: { Authorization: `Bearer ${token}`, } });
+      setIsLoading(true);
+      const response = await axios.put(`http://localhost:5001/jobs/${localStorage.getItem('jobId')}`, formData, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-      if (response.status === 201) { // Assuming successful creation returns status 201
-        alert('Job added successfully!');
-        // Clear form data after successful submission (optional)
-        setFormData({
-
-          title: '',
-          job_type: '',
-          owner: '',
-          experience: '',
-          location: '',
-          image: '',
-          deadline: '',
-          qualifications: '',
-          responsibility: '',
-          vacancy: '',
-          salary: '',
-          category_id: ''
-        });
+      if (response.status === 200) { // Assuming successful update returns status 200
+        alert('Job updated successfully!');
+        navigate('/JobDashboard'); // Redirect to jobs list or a success page
       } else {
-        alert('There was an error adding the job. Please try again later.');
+        alert('There was an error updating the job. Please try again later.');
       }
     } catch (error) {
-      console.error('Error in job:', error);
-      alert('An unexpected error occurred. Please try again later.');
-      window.alert('Server problem in Jobs service. Please try again later.');
+      console.error('Error updating job:', error);
+      setError(error.message); // Handle errors gracefully
+    } finally {
+      setIsLoading(false);
     }
   };
+
+
+  
 
 
   return (
@@ -95,7 +109,7 @@ function PostJob() {
         <div className="container">
           <div className="row">
             <div className="col-xl-12">
-              <h3>Add New Job</h3>
+              <h3>Update Job</h3>
             </div>
           </div>
         </div>
@@ -262,5 +276,5 @@ function PostJob() {
   );
 }
 
-export default PostJob;
+export default UpdateJob;
 

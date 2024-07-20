@@ -24,7 +24,9 @@ function Login() {
             if (response.ok) {
                 const data = await response.json();
                 localStorage.setItem('token', data.token);
-                navigate('/'); // Redirect on success (optional)
+                localStorage.setItem('role', data.role); // Add role to local storage
+                window.location.href = '/'; // Navigate to home page and reload
+                //navigate('/'); // Redirect on success (optional)
             } else {
                 setError('Invalid email or password');
             }

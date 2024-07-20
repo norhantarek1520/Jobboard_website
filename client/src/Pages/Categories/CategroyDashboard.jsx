@@ -3,16 +3,19 @@ import axios from 'axios'; // Import Axios for making HTTP requests
 
 const CategroyDashboard = () => {
   const [categories, setCategories] = useState([]); // State to store fetched categories
+  const [token, setToken] = useState(null);
 
-  // Fetches categories on component mount
   useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    setToken(storedToken);
+
     const fetchCategories = async () => {
       try {
         const response = await axios.get('http://localhost:5001/categories');
-        setCategories(response.data.list);
+        setCategories(response.data.categories);
       } catch (error) {
         console.error('Error fetching categories:', error);
-        window.alert('Server problem in Cateotry service . Please try again later.');
+        window.alert(`Error fetching categories: ${error}`);
       }
     };
     fetchCategories();
@@ -22,73 +25,73 @@ const CategroyDashboard = () => {
   const handleDeleteCategory = async (categoryId) => {
     if (window.confirm('Are you sure you want to delete this category?')) {
       try {
-        const response = await axios.delete(`http://localhost:5001/categories/${categoryId}`);
+        const response = await axios.delete(`http://localhost:5001/categories/${categoryId}` ,
+            { headers: { Authorization: `Bearer ${token}`, } });
         if (response.status === 204) {
-          setCategories(categories.filter((category) => category._id !== categoryId));
+          setCategories(categories.filter((category) => category.id !== categoryId));
           alert('Category deleted successfully!');
         } else {
           alert('Error deleting category. Please try again later.');
         }
       } catch (error) {
-        console.error('Error deleting category:', error);
-        alert('An unexpected error occurred. Please try again later.');
-        window.alert('Server problem in Cateotry service . Please try again later.');
+        console.error(`Error deleting category:${error}`);
+        alert(`Error deleting category:${error}`);
+     
       }
     }
   };
   const handleUpdateCategory = async (categoryId) => {
-    const categoryToUpdate = categories.find(category => category._id === categoryId);
+    const categoryToUpdate = categories.find(category => category.id === categoryId);
     if (!categoryToUpdate) {
       alert('Category not found!');
       return;
     }
-    const newName = prompt('Enter new category name:', categoryToUpdate.name);
+    const newTitle = prompt('Enter new category Title:', categoryToUpdate.title);
     const newDescription = prompt('Enter new category description:', categoryToUpdate.description);
     const updateData = {
-      name: newName,
+      title: newTitle,
       description: newDescription,
     };
     try {
-      const response = await axios.put(`http://localhost:5001/categories/${categoryId}`, updateData);
-      if (response.status === 201) {
+      const response = await axios.put(`http://localhost:5001/categories/${categoryId}`, 
+        updateData , 
+        { headers: { Authorization: `Bearer ${token}`, } });
+      if (response.status === 200) {
         const updatedCategories = categories.map(category => {
-          if (category._id === categoryId) {
-            return { ...category, ...updateData }; // Merge updated data
+          if (category.id === categoryId) {
+            return { ...category, ...updateData }; 
           }
           return category;
         });
         setCategories(updatedCategories);
-        alert('Category updated successfully!');
+        // alert('Category updated successfully!');
       } else {
         alert('Error updating category. Please try again later.');
       }
     } catch (error) {
-      console.error('Error updating category:', error);
-      alert('An unexpected error occurred. Please try again later.');
-      window.alert('Server problem in Cateotry service . Please try again later.');
+      console.error(`Error updating category: ${error}`);
+      alert(`Error updating category: ${error}`);
     }
   };
   const handleAddNewCategory = async () => {
-    // 1. Get user input for name and description
-    const name = prompt('Enter new category name:');
+
+    const title = prompt('Enter new category title:');
     const description = prompt('Enter new category description:');
-
-    // 2. Validate user input (optional)
-    // You can add checks for empty strings or invalid characters here
-
-    // 3. Prepare new category data object
     const newCategory = {
-      name,
+      title,
       description,
     };
 
     // 4. Send POST request to add new category API endpoint
     try {
-      const response = await axios.post('http://localhost:5001/categories', newCategory);
+      const response = await axios.post('http://localhost:5001/categories',
+         newCategory , 
+         { headers: { Authorization: `Bearer ${token}`, } });
       if (response.status === 201) { // Check for created status code
         // 4.1 Update local state with new category
         setCategories([...categories, response.data]); // Add new category to state
         alert('Category added successfully!');
+        window.location.href = '/CategroyDashboard';
       } else {
         alert('Error adding category. Please try again later.');
       }
@@ -124,7 +127,7 @@ const CategroyDashboard = () => {
 
               </div>
               <div className="col-sm-6 add-Category-button text-right mt-3">
-                {/*  */}
+                
                 <button className="btn btn-success" onClick={() => handleAddNewCategory()}>
                   Add New Cateogry
                 </button>
@@ -137,7 +140,7 @@ const CategroyDashboard = () => {
             <thead>
               <tr>
                 <th></th>
-                <th>Name</th>
+                <th>Title</th>
                 <th>Description</th>
                 <th>Edit</th>
                 <th>Delete</th>
@@ -150,27 +153,27 @@ const CategroyDashboard = () => {
               ) : (
 
                 categories.map((category) => (
-                  <tr key={category._id}>
+                  <tr key={category.id}>
                     <td>
                       <span className="custom-checkbox">
                         <input
                           type="checkbox"
-                          id={`checkbox-${category._id}`}
+                          id={`checkbox-${category.id}`}
                           name="options[]"
-                          value={category._id}
+                          value={category.id}
                         />
-                        <label htmlFor={`checkbox-${category._id}`}></label>
+                        <label htmlFor={`checkbox-${category.id}`}></label>
                       </span>
                     </td>
-                    <td>{category.name}</td>
+                    <td>{category.title}</td>
                     <td>{category.description}</td>
                     <td>
-                      <button onClick={() => handleUpdateCategory(category._id)}>
+                      <button onClick={() => handleUpdateCategory(category.id)}>
                         Edit
                       </button>
                     </td>
                     <td>
-                      <button onClick={() => handleDeleteCategory(category._id)}>
+                      <button onClick={() => handleDeleteCategory(category.id)}>
                         Delete
                       </button>
                     </td>

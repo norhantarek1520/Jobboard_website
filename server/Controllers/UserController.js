@@ -29,12 +29,14 @@ class UserController {
     }
   })
   static  updateUser = asyncHandler(async (req, res,next) => {
-    const userId = req.params.id;
+   
+    let  authToken = req.headers.authorization.split(' ')[1]; 
     const user_data = req.body; 
   
     try {
+      const userId = getUserId(authToken)
       const userobj = {    
-        gender: user_data.gender === undefined ? null : user_data.gender,
+        gender: user_data.gender || 'male',
         name: user_data.name,
         address: user_data.address,
         education: user_data.education,
@@ -42,7 +44,7 @@ class UserController {
         image: user_data.image,
         age: user_data.age,
         phone_number: user_data.phone_number,
-        id : userId}
+        id : userId.userId}
       const updated = await User.update(userobj);
     
       if (updated) {
@@ -68,5 +70,6 @@ class UserController {
       return next(new ApiError(`Internal server error  , The error is : ${error}`, 500));
        }
   })
+
 }
 module.exports = { UserController }

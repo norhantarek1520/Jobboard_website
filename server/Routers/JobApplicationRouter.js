@@ -9,8 +9,8 @@ router.put('/:applicationId', isAuthorized, JobApplicationController.updateAppli
 router.delete('/:applicationId', isAuthorized, JobApplicationController.deleteApplication);
 router.get('/:applicationId', isAuthorized, JobApplicationController.getApplicationById);
 //router.get('/userApplications', isAuthorized, JobApplicationController.getUserApplicaions)
-
-router.get('/', isAdmin,JobApplicationController.getAllApplications);
+router.get('/job_applications' , isAdmin , JobApplicationController.getJobApplicaions)
+router.get('/admin/', isAdmin,JobApplicationController.getAllApplications);
 // router.put('/admin/:applicationId', isAdmin, JobApplicationController.updateApplicatoinStatus);
 
 module.exports = router

@@ -34,7 +34,7 @@ class CategoryController{
     try {
       const deleted = await Category.delete(categoryId);
       if (deleted) {
-        res.status(200).json({ message: 'Category deleted successfully' });
+        res.status(204).json({ message: 'Category deleted successfully' });
       } else {
         res.status(404).json({ message: 'Category not found' });
       }

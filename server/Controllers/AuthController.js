@@ -43,7 +43,8 @@ class AuthController {
       const token = createToken(userId)
       if (token != null) {
         // delete user._doc.password;
-        res.status(201).json({ token });
+        const user = await User.getByEmail(email);
+        res.status(201).json({ "token" :token , "role" : user.role });
       }
       else {
         res.status(500).json("Yourdata is added to databases but we have poblem , please try to login ")
@@ -84,7 +85,9 @@ class AuthController {
     }
   
     // 6. Send response with user data and token
-    res.status(200).json({ token });
+    // res.status(200).json({ "token" : token  , role : user[0].role});
+    res.status(200).json({ "token" : token  , "role" : user.role});
+
   });
   static logout = asyncHandler(async (req, res, next) => {
     const token = req.headers.authorization?.split(' ')[1];

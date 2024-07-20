@@ -33,11 +33,13 @@ class CompanyController{
       const companyToUpdate = {
         name: req.body.name,
         website: req.body.website,
-        logo: req.body.logo,
+        logo: "req.body.logo",
         description: req.body.description,
         location: req.body.location,
         industry: req.body.industry,
-        owner_user_id: req.body.owner_user_id,
+        // owner_user_id: req.body.owner_user_id,
+        owner_user_id: 1, // this will be updated
+      
         id:companyId
       };
 
@@ -57,7 +59,7 @@ class CompanyController{
     try {
       const deleted = await Company.delete(companyId);
       if (deleted) {
-        res.status(200).json({ message: 'Company deleted successfully' });
+        res.status(204).json({ message: 'Company deleted successfully' });
       } else {
         res.status(404).json({ message: 'Company not found' });
       }

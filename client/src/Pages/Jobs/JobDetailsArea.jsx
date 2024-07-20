@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import ApplicationCart  from "../../Components/ApplicationCart"
+import ApplicationCart from "../../Components/ApplicationCart"
 function JobDetailsArea() {
     const [jobDetails, setJobDetails] = useState({});
     const jobId = localStorage.getItem('jobId'); // Retrieve job ID from local storage
@@ -64,6 +64,11 @@ function JobDetailsArea() {
                                                             <i className="fa fa-clock-o"></i> {jobDetails.job_type}
                                                         </p>
                                                     </div>
+                                                    {/* <div className="owner">
+                                                        <p>
+                                                            <i className="fa fa-clock-o"></i> {jobDetails.owner}
+                                                        </p>
+                                                    </div> */}
                                                 </div>
                                             </div>
                                         </div>
@@ -108,11 +113,13 @@ function JobDetailsArea() {
                                     </div>
                                     <div className="job_content">
                                         <ul>
-                                            <li>Published on: <span>12 Nov, 2019</span></li>
-                                            <li>Vacancy: <span>2 Position</span></li>
-                                            <li>Salary: <span>50k - 120k/y</span></li>
-                                            <li>Location: <span>California, USA</span></li>
-                                            <li>Job Nature: <span> Full-time</span></li>
+                                         
+                                            <li>Vacancy: <span>{jobDetails.vacancy} Position</span></li>
+                                            <li>Salary: <span>{jobDetails.salary}</span></li>
+                                            <li>Location: <span>{jobDetails.location}</span></li>
+                                            <li>Job Type: <span> {jobDetails.job_type}</span></li>
+                                            <li>Published on: <span> {jobDetails.published_on}</span></li>
+                                            <li>Deadline : <span> {jobDetails.deadline}</span></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -131,10 +138,10 @@ function JobDetailsArea() {
                         </div>
 
                     </div></div>
-        
+
             )
             }
-            <ApplicationCart/>
+            <ApplicationCart />
 
         </div>)
 }

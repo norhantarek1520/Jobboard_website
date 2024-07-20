@@ -38,7 +38,7 @@ return (
 
             <a href="#">  <h3>{category.title}</h3>  </a>
 
-            <p>  <span>description : </span>   </p>
+            {/* <p>  <span>description : </span>   </p> */}
             
             <p>{category.description || "No description available."}</p>
             

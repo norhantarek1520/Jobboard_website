@@ -63,7 +63,7 @@ class JobController {
     try {
       const deleted = await Job.delete(jobId);
       if (deleted) {
-        res.status(200).json({ message: 'Job deleted successfully' });
+        res.status(204).json({ message: 'Job deleted successfully' });
       } else {
         res.status(404).json({ message: 'Job not found' });
       }
