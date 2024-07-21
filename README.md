@@ -112,3 +112,20 @@ Once you've found a few jobs you're interested in, you can easily apply online o
 | title | VARCHAR(70) UNIQUE NOT NULL |
 | image | varchar(255) |
 | description | TEXT |
+
+## Demo 
+General
+![image](https://github.com/user-attachments/assets/68bce6c7-5d61-4755-abe0-13d9c600c6fe)
+User
+![image](https://github.com/user-attachments/assets/3523d1e2-e4ef-41d6-aa02-efdefdad6926)
+![image](https://github.com/user-attachments/assets/03d8412e-999f-44b8-a1cc-10de2cda9fe9)
+![image](https://github.com/user-attachments/assets/c50d4f8a-9aee-4039-bed0-0028c8f60e7e)
+Admin 
+![image](https://github.com/user-attachments/assets/a556b5f4-13be-4516-818b-aa0564060a82)
+![image](https://github.com/user-attachments/assets/387c0cd4-55b2-42aa-8688-b3e9cea2b346)
+![image](https://github.com/user-attachments/assets/d79ef16f-4737-44b2-ab10-1a0ab74a0a50)
+
+
+
+
+
