@@ -115,7 +115,7 @@ const JobDashboard = () => {
                   <th>Title</th>
                   <th>Job Type</th>
                   <th>experience</th>
-                  {/* <th>APPLICATIONS</th> */}
+                  <th>APPLICATIONS</th>
                   <th>Edit</th>
                   <th> Delete</th>
 
@@ -137,11 +137,11 @@ const JobDashboard = () => {
                       </td>
                     <td>{job.job_type}</td>
                     <td>{job.experience}</td>
-                    {/* <td>
+                    <td>
                       <button onClick={() => handleApplicatios(job.id)}>
                       APPLICATIONS
                       </button>
-                    </td> */}
+                    </td>
 
                     <td>
                       <button onClick={() => handleUpdateJob(job.id)}>

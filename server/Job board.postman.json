@@ -1,0 +1,3074 @@
+{
+	"info": {
+		"_postman_id": "fb03f620-f4b2-45cf-aa38-d04aa1ce8bbf",
+		"name": "Job board",
+		"description": "This document outlines the API functionalities for our job search platform, catering to both users and administrators.\n\nOur platform simplifies the job search process for users by offering a vast array of jobs across diverse industries and locations. Our user-friendly search tools empower users to find jobs matching their skillsets and interests. Advanced filtering options allow for precise job hunting, streamlining the application process.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "26984810"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \r\n      \"email\" : \"nourhanTarek123@gmail.com\" ,\r\n    \"password\" : \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5001/login",
+						"description": "Login using email and password"
+					},
+					"response": [
+						{
+							"name": "admin",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \r\n      \"email\" : \"nourhanTarek123@gmail.com\" ,\r\n    \"password\" : \"12345678\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:5001/login"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "184"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b8-QVh0o/yesMZ4+cZHAbfQ7A9WiVU\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Jul 2024 06:45:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIxNTQ0MzUwLCJleHAiOjE3MzAxODQzNTB9.oPbUMPIzwNwNgF8J2JvRX6wuDEV96QJh4UqwZNdz-sQ\",\n    \"role\": \"Admin\"\n}"
+						},
+						{
+							"name": "user",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \r\n \"email\" : \"Mahmoud hany @gmail.com\" ,\r\n    \"password\" : \"12345678\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:5001/login"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "183"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b7-U9SNWCY885d8j0nXzBkwP2GQWv8\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Jul 2024 06:46:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjo1fSwiaWF0IjoxNzIxNTQ0MzcxLCJleHAiOjE3MzAxODQzNzF9.UVZGZDClhQKZQQAba3S23EG4CArm9ezu3JLP0_gtWg0\",\n    \"role\": \"User\"\n}"
+						},
+						{
+							"name": "invalid emaill",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \r\n \"email\" : \"Mah@gmail.com\" ,\r\n    \"password\" : \"12345678\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:5001/login"
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "361"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"169-w4cGvyw+Y33nK960iF5jhRd0WuM\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Jul 2024 06:46:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Fail\",\n    \"error\": {\n        \"statusCode\": 401,\n        \"status\": \"Fail\",\n        \"isOperational\": true\n    },\n    \"message\": \"Invalid email or password\",\n    \"stack\": \"Error: Invalid email or password\\n    at I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\Controllers\\\\AuthController.js:72:19\\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\"\n}"
+						},
+						{
+							"name": "email or password is not provided",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \r\n \r\n    \"password\" : \"12345678\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:5001/login"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1627"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"65b-GrGGHsiwaOSs8+oNk5EQ0t/k4+w\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Jul 2024 06:47:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Fail\",\n    \"error\": {\n        \"statusCode\": 400,\n        \"status\": \"Fail\",\n        \"isOperational\": true\n    },\n    \"message\": \"Please provide email and password\",\n    \"stack\": \"Error: Please provide email and password\\n    at I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\Controllers\\\\AuthController.js:66:19\\n    at asyncUtilWrap (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express-async-handler\\\\index.js:3:20)\\n    at Layer.handle [as handle_request] (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:144:13)\\n    at Route.dispatch (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:114:3)\\n    at Layer.handle [as handle_request] (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:284:15\\n    at Function.process_params (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:346:12)\\n    at next (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:280:10)\\n    at Function.handle (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:175:3)\"\n}"
+						}
+					]
+				},
+				{
+					"name": "sign up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"nourhan tarek\" ,\r\n    \"email\" : \"nourhanTkarek123@gmail.com\" ,\r\n    \"password\" : \"12345678\",\r\n    \"confirmPassword\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5001/register",
+						"description": "Create a new accoun using name , email , password and confirmPassword"
+					},
+					"response": [
+						{
+							"name": "pass and confim pass",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\" : \"Mahmoud hany \" ,\r\n    \"email\" : \"Mahmoud hany @gmail.com\" ,\r\n    \"password\" : \"12345678\",\r\n    \"confirmPassword\": \"123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:5001/register"
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "403"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"193-0Yeo8XlPsXKwn0Q6FyEFiz5nCVU\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Jul 2024 06:44:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Fail\",\n    \"error\": {\n        \"statusCode\": 400,\n        \"status\": \"Fail\",\n        \"isOperational\": true\n    },\n    \"message\": \"Password and confirmPassword are not the same \",\n    \"stack\": \"Error: Password and confirmPassword are not the same \\n    at I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\Controllers\\\\AuthController.js:28:52\\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\"\n}"
+						},
+						{
+							"name": "sign up",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\" : \"Mahmoud hany \" ,\r\n    \"email\" : \"Mahmoud hany @gmail.com\" ,\r\n    \"password\" : \"12345678\",\r\n    \"confirmPassword\": \"12345678\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:5001/register"
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "154"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9a-TnSBvLPJ7j+jUT5wbWFPsa9Xed4\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Jul 2024 06:45:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MjE1NDQzMDEsImV4cCI6MTczMDE4NDMwMX0.5ECr3TwHFeNRJ3gFCLHkMGGCD3UXfMvWXGK9gfPL0S0\",\n    \"role\": \"User\"\n}"
+						}
+					]
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.39.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoyfSwiaWF0IjoxNzIwMTk1NDYxLCJleHAiOjE3Mjg4MzU0NjF9.zW1m3avb1mMU8ZCiDukonVz4tG1BX2AZaB_lP3jtPAA",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:5001/logout"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "get user profile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIwMjc2Njg5LCJleHAiOjE3Mjg5MTY2ODl9.iBNYk7Bgh2nAfVOGFZhCLlsBT5uEyeSewtagzQ406oA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": "http://localhost:5001/users/myprofile",
+						"description": "Retrive User data"
+					},
+					"response": [
+						{
+							"name": "get user profile",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIwMjc2Njg5LCJleHAiOjE3Mjg5MTY2ODl9.iBNYk7Bgh2nAfVOGFZhCLlsBT5uEyeSewtagzQ406oA",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": "http://localhost:5001/users/myprofile"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "419"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1a3-PWlEsKWz4eyrie0YS4AwzhTPGWI\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Jul 2024 06:23:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"gender\": \"female\",\n        \"role\": \"Admin\",\n        \"id\": 1,\n        \"name\": \"nourhan tarek abdelhady\",\n        \"email\": \"nourhanTarek123@gmail.com\",\n        \"password\": \"$2b$10$vjt6zkQCT1ZDLnTY/Hsvpu3DGZifrqjBDf6hQJlOa6Vn2l19cPUM6\",\n        \"address\": \"cairo\",\n        \"education\": \"cs\",\n        \"job_title\": \"backend\",\n        \"image\": {\n            \"type\": \"Buffer\",\n            \"data\": [\n                110,\n                117,\n                108,\n                108\n            ]\n        },\n        \"age\": 22,\n        \"phone_number\": \"01100492116\",\n        \"created_at\": \"2024-07-05T15:49:37.000Z\",\n        \"updated_at\": \"2024-07-09T04:11:30.000Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "update user profile",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIwMjc2Njg5LCJleHAiOjE3Mjg5MTY2ODl9.iBNYk7Bgh2nAfVOGFZhCLlsBT5uEyeSewtagzQ406oA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"gender\": \"female\",\r\n    \"name\": \"nourhan tarek abdelhady\",\r\n    \"address\": \"cairo\",\r\n    \"education\": \"cs\",\r\n    \"job_title\": \"backend\",\r\n    \"image\": null,\r\n    \"age\": 22,\r\n    \"phone_number\": \"01100492116\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5001/users/update_profile",
+						"description": "update user data"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "get all Categories",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5001/categories",
+						"description": "Retrieves a list of available job categories."
+					},
+					"response": [
+						{
+							"name": "get all Categories",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:5001/categories"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1870"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"74e-IBxKj/+B1UhuxO93CM8pG2JwVpo\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Jul 2024 06:24:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"length\": 6,\n    \"categories\": [\n        {\n            \"id\": 1,\n            \"title\": \"Technology \",\n            \"image\": \"undefined\",\n            \"description\": \"Technology professionals work with computers and other electronic devices to automate tasks and improve efficiency in the workplace or for consumers. They write code, develop robotic technology, and design systems to transport and store information.\",\n            \"created_at\": \"2024-07-04T07:56:04.000Z\",\n            \"updated_at\": \"2024-07-20T04:46:32.000Z\"\n        },\n        {\n            \"id\": 2,\n            \"title\": \"Law and government\",\n            \"image\": \"undefined\",\n            \"description\": \"The legal field encompasses a wide variety of positions, including people who enforce the law and people involved in operating the judicial system.\",\n            \"created_at\": \"2024-07-04T07:56:43.000Z\",\n            \"updated_at\": \"2024-07-20T04:43:12.000Z\"\n        },\n        {\n            \"id\": 3,\n            \"title\": \"Graphic Designer\",\n            \"image\": \"images/graphic_designer.png\",\n            \"description\": \"Jobs related to graphic design and visual communication.\",\n            \"created_at\": \"2024-07-09T07:46:10.000Z\",\n            \"updated_at\": \"2024-07-09T07:46:10.000Z\"\n        },\n        {\n            \"id\": 5,\n            \"title\": \"Health care\",\n            \"image\": \"undefined\",\n            \"description\": \"A career in the health care industry can be a satisfying option if you want to help people in your community.\",\n            \"created_at\": \"2024-07-20T04:39:44.000Z\",\n            \"updated_at\": \"2024-07-20T04:44:05.000Z\"\n        },\n        {\n            \"id\": 6,\n            \"title\": \"Education\",\n            \"image\": \"undefined\",\n            \"description\": \"sharing information, teaching other people, and helping them develop essential skills\",\n            \"created_at\": \"2024-07-20T04:42:20.000Z\",\n            \"updated_at\": \"2024-07-20T04:42:34.000Z\"\n        },\n        {\n            \"id\": 7,\n            \"title\": \"Finance\",\n            \"image\": null,\n            \"description\": \"The finance field is a job category for people who work with money and guide how individuals and organizations manage their finances. Jobs in finance often involve reviewing data, looking for patterns, and making projections to determine the best financial choices for a particular situation.\",\n            \"created_at\": \"2024-07-20T04:45:02.000Z\",\n            \"updated_at\": \"2024-07-20T04:45:02.000Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "get one Category",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIwMjc2Njg5LCJleHAiOjE3Mjg5MTY2ODl9.iBNYk7Bgh2nAfVOGFZhCLlsBT5uEyeSewtagzQ406oA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5001/categories/:categoryId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"categories",
+								":categoryId"
+							],
+							"variable": [
+								{
+									"key": "categoryId",
+									"value": "2"
+								}
+							]
+						},
+						"description": "Gets details of a specific job category"
+					},
+					"response": [
+						{
+							"name": "get one Category",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIwMjc2Njg5LCJleHAiOjE3Mjg5MTY2ODl9.iBNYk7Bgh2nAfVOGFZhCLlsBT5uEyeSewtagzQ406oA",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5001/categories/:categoryId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"categories",
+										":categoryId"
+									],
+									"variable": [
+										{
+											"key": "categoryId",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "301"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"12d-WaELmcIOyadc5EyCO5v9z/qMmWg\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Jul 2024 06:24:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"title\": \"Law and government\",\n    \"image\": \"undefined\",\n    \"description\": \"The legal field encompasses a wide variety of positions, including people who enforce the law and people involved in operating the judicial system.\",\n    \"created_at\": \"2024-07-04T07:56:43.000Z\",\n    \"updated_at\": \"2024-07-20T04:43:12.000Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "update Category",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIwMjc2Njg5LCJleHAiOjE3Mjg5MTY2ODl9.iBNYk7Bgh2nAfVOGFZhCLlsBT5uEyeSewtagzQ406oA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \r\n  \r\n  \"title\": \"test cateogry update \",\r\n  \"description\": \"update\"\r\n  \r\n  \r\n} ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/categories/:categoryId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"categories",
+								":categoryId"
+							],
+							"variable": [
+								{
+									"key": "categoryId",
+									"value": "8"
+								}
+							]
+						},
+						"description": "(Requires admin permissions) Updates an existing job category."
+					},
+					"response": []
+				},
+				{
+					"name": "delete Category",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.39.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIwMjc2Njg5LCJleHAiOjE3Mjg5MTY2ODl9.iBNYk7Bgh2nAfVOGFZhCLlsBT5uEyeSewtagzQ406oA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5001/categories/:categoryId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"categories",
+								":categoryId"
+							],
+							"variable": [
+								{
+									"key": "categoryId",
+									"value": "8"
+								}
+							]
+						},
+						"description": "(Requires admin permissions) Delete an existing job category."
+					},
+					"response": [
+						{
+							"name": "delete Category",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Cache-Control",
+										"value": "no-cache",
+										"type": "text"
+									},
+									{
+										"key": "Postman-Token",
+										"value": "<calculated when request is sent>",
+										"type": "text"
+									},
+									{
+										"key": "Host",
+										"value": "<calculated when request is sent>",
+										"type": "text"
+									},
+									{
+										"key": "User-Agent",
+										"value": "PostmanRuntime/7.39.1",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Encoding",
+										"value": "gzip, deflate, br",
+										"type": "text"
+									},
+									{
+										"key": "Connection",
+										"value": "keep-alive",
+										"type": "text"
+									},
+									{
+										"key": "authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIwMjc2Njg5LCJleHAiOjE3Mjg5MTY2ODl9.iBNYk7Bgh2nAfVOGFZhCLlsBT5uEyeSewtagzQ406oA",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5001/categories/:categoryId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"categories",
+										":categoryId"
+									],
+									"variable": [
+										{
+											"key": "categoryId",
+											"value": "8"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-oSB9C9UJoaUkZ5Mu5gkTHkZwuV4\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Jul 2024 06:27:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "add new Category",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIwMjc2Njg5LCJleHAiOjE3Mjg5MTY2ODl9.iBNYk7Bgh2nAfVOGFZhCLlsBT5uEyeSewtagzQ406oA",
+								"description": "nourhan\n",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \r\n  \r\n  \"title\": \"test cstegory\",\r\n  \"description\": \"Jobs related to software development and engineering.\"\r\n  \r\n  \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5001/categories",
+						"description": "(Requires admin permissions) Add new job category."
+					},
+					"response": [
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIwMjc2Njg5LCJleHAiOjE3Mjg5MTY2ODl9.iBNYk7Bgh2nAfVOGFZhCLlsBT5uEyeSewtagzQ406oA",
+										"description": "nourhan\n",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \r\n  \r\n  \"title\": \"test cstegory\",\r\n  \"description\": \"Jobs related to software development and engineering.\"\r\n  \r\n  \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:5001/categories"
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1675"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"68b-zgGpPKIDu/0TfHChL/Murmt/0Fw\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Jul 2024 06:25:07 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Fail\",\n    \"error\": {\n        \"statusCode\": 401,\n        \"status\": \"Fail\",\n        \"isOperational\": true\n    },\n    \"message\": \"You are not login, Please login to get access this route\",\n    \"stack\": \"Error: You are not login, Please login to get access this route\\n    at I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\Middlwares\\\\isAdminMiddleware.js:13:19\\n    at asyncUtilWrap (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express-async-handler\\\\index.js:3:20)\\n    at Layer.handle [as handle_request] (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:144:13)\\n    at Route.dispatch (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:114:3)\\n    at Layer.handle [as handle_request] (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:284:15\\n    at Function.process_params (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:346:12)\\n    at next (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:280:10)\\n    at Function.handle (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:175:3)\"\n}"
+						},
+						{
+							"name": "add new Category",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIwMjc2Njg5LCJleHAiOjE3Mjg5MTY2ODl9.iBNYk7Bgh2nAfVOGFZhCLlsBT5uEyeSewtagzQ406oA",
+										"description": "nourhan\n",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \r\n  \r\n  \"title\": \"test cstegory\",\r\n  \"description\": \"Jobs related to software development and engineering.\"\r\n  \r\n  \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:5001/categories"
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-6aRNjCaAgGT561PQXIupOm7tRzw\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Jul 2024 06:25:39 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Category created successfully\"\n}"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "jwt",
+				"jwt": {
+					"algorithm": "HS256",
+					"isSecretBase64Encoded": false,
+					"payload": "{}",
+					"addTokenTo": "header",
+					"headerPrefix": "Bearer",
+					"queryParamKey": "token",
+					"header": "{}"
+				}
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Companies",
+			"item": [
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:5001/companies",
+						"description": "Retrieves a list of companies with basic information."
+					},
+					"response": []
+				},
+				{
+					"name": "get one company",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"accept": true,
+							"accept-encoding": true,
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIwMjc2Njg5LCJleHAiOjE3Mjg5MTY2ODl9.iBNYk7Bgh2nAfVOGFZhCLlsBT5uEyeSewtagzQ406oA",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5001/companies/:companyId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"companies",
+								":companyId"
+							],
+							"variable": [
+								{
+									"key": "companyId",
+									"value": "2"
+								}
+							]
+						},
+						"description": "Gets detailed information about a specific company."
+					},
+					"response": []
+				},
+				{
+					"name": "update company",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"connection": true,
+							"accept-encoding": true,
+							"content-type": true,
+							"content-length": true,
+							"host": true,
+							"accept": true,
+							"user-agent": true
+						}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"name": "content-type",
+								"type": "text"
+							},
+							{
+								"key": "Content-Length",
+								"value": "<calculated when request is sent>",
+								"name": "content-length",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.39.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIwMjc2Njg5LCJleHAiOjE3Mjg5MTY2ODl9.iBNYk7Bgh2nAfVOGFZhCLlsBT5uEyeSewtagzQ406oA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"TWD\",\r\n  \"website\": \"https://TWD.com\",\r\n  \"logo\": \"binary_data_of_your_logo_image\",  // Replace with actual logo data in BLOB format\r\n  \"description\": \"We are a company dedicated to creating innovative products and services.\",\r\n  \"location\": \"Cairo\",\r\n  \"industry\": \"Technology\",\r\n  \"owner_user_id\": 1  // Assuming this is the user ID of the company owner\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/companies/:companyId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"companies",
+								":companyId"
+							],
+							"variable": [
+								{
+									"key": "companyId",
+									"value": "2"
+								}
+							]
+						},
+						"description": "(Requires admin permissions) Updates an existing Company"
+					},
+					"response": []
+				},
+				{
+					"name": "delete Company",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"accept": true,
+							"accept-encoding": true,
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.39.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIwMjc2Njg5LCJleHAiOjE3Mjg5MTY2ODl9.iBNYk7Bgh2nAfVOGFZhCLlsBT5uEyeSewtagzQ406oA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5001/companies/:companyId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"companies",
+								":companyId"
+							],
+							"variable": [
+								{
+									"key": "companyId",
+									"value": "2"
+								}
+							]
+						},
+						"description": "(Requires admin permissions) Delete an existing Company"
+					},
+					"response": []
+				},
+				{
+					"name": "add new company",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"connection": true,
+							"accept-encoding": true,
+							"accept": true,
+							"user-agent": true,
+							"host": true,
+							"content-length": true,
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"name": "content-type",
+								"type": "text"
+							},
+							{
+								"key": "Content-Length",
+								"value": "<calculated when request is sent>",
+								"name": "content-length",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.39.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIwMjc2Njg5LCJleHAiOjE3Mjg5MTY2ODl9.iBNYk7Bgh2nAfVOGFZhCLlsBT5uEyeSewtagzQ406oA",
+								"type": "text"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoyfSwiaWF0IjoxNzIwMTk1NDYxLCJleHAiOjE3Mjg4MzU0NjF9.zW1m3avb1mMU8ZCiDukonVz4tG1BX2AZaB_lP3jtPAA",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Amazing Inc.\",\r\n  \"website\": \"https://amazinginc.com\",\r\n  \"logo\": \"binary_data_of_your_logo_image\",  // Replace with actual logo data in BLOB format\r\n  \"description\": \"We are a company dedicated to creating innovative products and services.\",\r\n  \"location\": \"San Francisco, CA\",\r\n  \"industry\": \"Technology\",\r\n  \"owner_user_id\": 1  \r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5001/companies",
+						"description": "(Requires admin permissions) Add new Company"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Jobs",
+			"item": [
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:5001/jobs"
+					},
+					"response": [
+						{
+							"name": "Get all jobs",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:5001/jobs"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "3097"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"c19-4Lgub+bXBFSCHBU1CPkwCaPRxb8\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Jul 2024 05:53:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"jobs\": [\n        {\n            \"id\": 1,\n            \"title\": \"Software Engineer\",\n            \"job_type\": \"Full Time\",\n            \"owner\": \"Google\",\n            \"experience\": 5,\n            \"location\": \"Mountain View, CA\",\n            \"image\": \"https://www.example.com/job_image.jpg\",\n            \"published_on\": \"2024-07-10T05:43:33.000Z\",\n            \"deadline\": \"2024-08-31T20:59:59.000Z\",\n            \"qualifications\": \"Strong programming skills in Java and Python\",\n            \"responsibility\": \"Develop and maintain high-quality software applications\",\n            \"vacancy\": 2,\n            \"salary\": 150000,\n            \"category_id\": 1,\n            \"created_at\": \"2024-07-10T05:43:33.000Z\",\n            \"updated_at\": \"2024-07-10T05:43:33.000Z\"\n        },\n        {\n            \"id\": 2,\n            \"title\": \"Front-End Developer (React)\",\n            \"job_type\": \"Full Time\",\n            \"owner\": \"Facebook\",\n            \"experience\": 3,\n            \"location\": \"Menlo Park, CA\",\n            \"image\": \"https://www.example.com/frontend_dev.jpg\",\n            \"published_on\": \"2024-07-13T03:09:39.000Z\",\n            \"deadline\": \"2024-09-15T20:59:59.000Z\",\n            \"qualifications\": \"Experience with React, JavaScript, HTML, CSS, and UI/UX principles\",\n            \"responsibility\": \"Build and maintain user interfaces for web applications\",\n            \"vacancy\": 1,\n            \"salary\": 120000,\n            \"category_id\": 1,\n            \"created_at\": \"2024-07-13T03:09:39.000Z\",\n            \"updated_at\": \"2024-07-13T03:09:39.000Z\"\n        },\n        {\n            \"id\": 3,\n            \"title\": \"Mobile App Developer (Swift)\",\n            \"job_type\": \"Full Time\",\n            \"owner\": \"Apple\",\n            \"experience\": 2,\n            \"location\": \"Cupertino, CA\",\n            \"image\": \"https://www.example.com/mobile_dev.jpg\",\n            \"published_on\": \"2024-07-13T03:09:58.000Z\",\n            \"deadline\": \"2024-08-20T20:59:59.000Z\",\n            \"qualifications\": \"Experience with Swift, iOS development, and mobile app design patterns\",\n            \"responsibility\": \"Develop and maintain native iOS applications\",\n            \"vacancy\": 3,\n            \"salary\": 135000,\n            \"category_id\": 1,\n            \"created_at\": \"2024-07-13T03:09:58.000Z\",\n            \"updated_at\": \"2024-07-13T03:09:58.000Z\"\n        },\n        {\n            \"id\": 4,\n            \"title\": \"Data Scientist\",\n            \"job_type\": \"Full Time\",\n            \"owner\": \"Microsoft\",\n            \"experience\": 5,\n            \"location\": \"Redmond, WA\",\n            \"image\": \"https://www.example.com/data_scientist.jpg\",\n            \"published_on\": \"2024-07-13T03:10:17.000Z\",\n            \"deadline\": \"2024-08-10T20:59:59.000Z\",\n            \"qualifications\": \"Experience with machine learning, data analysis, and statistical modeling\",\n            \"responsibility\": \"Develop and implement machine learning models for data-driven decision making\",\n            \"vacancy\": 2,\n            \"salary\": 160000,\n            \"category_id\": 1,\n            \"created_at\": \"2024-07-13T03:10:17.000Z\",\n            \"updated_at\": \"2024-07-13T03:10:17.000Z\"\n        },\n        {\n            \"id\": 5,\n            \"title\": \"Backend Developer (Nodejs)\",\n            \"job_type\": \"Full Time\",\n            \"owner\": \"Netflix\",\n            \"experience\": 4,\n            \"location\": \"Los Gatos, CA\",\n            \"image\": \"https://www.example.com/backend_dev.jpg\",\n            \"published_on\": \"2024-07-13T03:10:39.000Z\",\n            \"deadline\": \"2024-09-01T20:59:59.000Z\",\n            \"qualifications\": \"Experience with Java, Spring Boot, and relational databases\",\n            \"responsibility\": \"Develop and maintain backend services for web applications\",\n            \"vacancy\": 1,\n            \"salary\": 145000,\n            \"category_id\": 1,\n            \"created_at\": \"2024-07-13T03:10:39.000Z\",\n            \"updated_at\": \"2024-07-13T03:10:39.000Z\"\n        },\n        {\n            \"id\": 7,\n            \"title\": \"Backend devolper\",\n            \"job_type\": \"Part Time\",\n            \"owner\": \"7\",\n            \"experience\": 2,\n            \"location\": \"india\",\n            \"image\": \"\",\n            \"published_on\": \"2024-07-20T07:18:37.000Z\",\n            \"deadline\": \"2024-07-26T21:00:00.000Z\",\n            \"qualifications\": \"Good at nodejs \",\n            \"responsibility\": \"\",\n            \"vacancy\": 1,\n            \"salary\": 20000,\n            \"category_id\": 1,\n            \"created_at\": \"2024-07-20T07:18:37.000Z\",\n            \"updated_at\": \"2024-07-20T07:22:43.000Z\"\n        }\n    ],\n    \"length\": 6\n}"
+						}
+					]
+				},
+				{
+					"name": "get one job",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/jobs/:jobId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"jobs",
+								":jobId"
+							],
+							"variable": [
+								{
+									"key": "jobId",
+									"value": "10",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "no job id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5001/jobs/:jobId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"jobs",
+										":jobId"
+									],
+									"variable": [
+										{
+											"key": "jobId",
+											"value": "",
+											"type": "string"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1611"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"64b-I7XcnuxTW9Pp5RrkF4plHskymaE\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Jul 2024 05:57:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Fail\",\n    \"error\": {\n        \"statusCode\": 404,\n        \"status\": \"Fail\",\n        \"isOperational\": true\n    },\n    \"message\": \"Select the job (enter job id) \",\n    \"stack\": \"Error: Select the job (enter job id) \\n    at I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\Controllers\\\\JobController.js:18:43\\n    at asyncUtilWrap (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express-async-handler\\\\index.js:3:20)\\n    at Layer.handle [as handle_request] (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:144:13)\\n    at Route.dispatch (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:114:3)\\n    at Layer.handle [as handle_request] (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:284:15\\n    at param (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:365:14)\\n    at param (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:376:14)\\n    at Function.process_params (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:421:3)\"\n}"
+						},
+						{
+							"name": "get one job",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5001/jobs/:jobId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"jobs",
+										":jobId"
+									],
+									"variable": [
+										{
+											"key": "jobId",
+											"value": "1",
+											"type": "string"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "513"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"201-G9OxD6aeBzaMUF52kuvD87Ybh+Q\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Jul 2024 05:59:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"title\": \"Software Engineer\",\n    \"job_type\": \"Full Time\",\n    \"owner\": \"Google\",\n    \"experience\": 5,\n    \"location\": \"Mountain View, CA\",\n    \"image\": \"https://www.example.com/job_image.jpg\",\n    \"published_on\": \"2024-07-10T05:43:33.000Z\",\n    \"deadline\": \"2024-08-31T20:59:59.000Z\",\n    \"qualifications\": \"Strong programming skills in Java and Python\",\n    \"responsibility\": \"Develop and maintain high-quality software applications\",\n    \"vacancy\": 2,\n    \"salary\": 150000,\n    \"category_id\": 1,\n    \"created_at\": \"2024-07-10T05:43:33.000Z\",\n    \"updated_at\": \"2024-07-10T05:43:33.000Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "add new job",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIwMjc2Njg5LCJleHAiOjE3Mjg5MTY2ODl9.iBNYk7Bgh2nAfVOGFZhCLlsBT5uEyeSewtagzQ406oA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \r\n  \"title\": \"test Engineer\",\r\n  \"job_type\": \"Full Time\",\r\n  \"owner\": \"John Doe\",  // Replace with actual owner name\r\n  \"experience\": 3,\r\n  \"location\": \"San Francisco, CA\",\r\n  \"image\": \"https://www.example.com/job_postings/software_engineer.jpg\",\r\n  \"published_on\": \"2024-07-21T17:12:00.000Z\",  // Replace with actual date and time\r\n  \"deadline\": \"2024-08-31T23:59:59.000Z\",\r\n  \"qualifications\": \"Proven experience in software development, strong problem-solving skills...\",\r\n  \"responsibility\": \"Develop, test, and maintain software applications...\",\r\n  \"vacancy\": 2,\r\n  \"salary\": 120000.00,\r\n  \"category_id\": 1 \r\n\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5001/jobs"
+					},
+					"response": [
+						{
+							"name": "add new job",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIwMjc2Njg5LCJleHAiOjE3Mjg5MTY2ODl9.iBNYk7Bgh2nAfVOGFZhCLlsBT5uEyeSewtagzQ406oA",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \r\n  \"title\": \"Software Engineer\",\r\n  \"job_type\": \"Full Time\",\r\n  \"owner\": \"John Doe\",  // Replace with actual owner name\r\n  \"experience\": 3,\r\n  \"location\": \"San Francisco, CA\",\r\n  \"image\": \"https://www.example.com/job_postings/software_engineer.jpg\",\r\n  \"published_on\": \"2024-07-21T17:12:00.000Z\",  // Replace with actual date and time\r\n  \"deadline\": \"2024-08-31T23:59:59.000Z\",\r\n  \"qualifications\": \"Proven experience in software development, strong problem-solving skills...\",\r\n  \"responsibility\": \"Develop, test, and maintain software applications...\",\r\n  \"vacancy\": 2,\r\n  \"salary\": 120000.00,\r\n  \"category_id\": 1 \r\n\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:5001/jobs"
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-pTZuiSHVzrzA5NsLCVDpLroHFDU\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Jul 2024 06:14:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Job created successfully\"\n}"
+						},
+						{
+							"name": "without auth",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIwMjc2Njg5LCJleHAiOjE3Mjg5MTY2ODl9.iBNYk7Bgh2nAfVOGFZhCLlsBT5uEyeSewtagzQ406oA",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \r\n  \"title\": \"Software Engineer\",\r\n  \"job_type\": \"Full Time\",\r\n  \"owner\": \"John Doe\",  // Replace with actual owner name\r\n  \"experience\": 3,\r\n  \"location\": \"San Francisco, CA\",\r\n  \"image\": \"https://www.example.com/job_postings/software_engineer.jpg\",\r\n  \"published_on\": \"2024-07-21T17:12:00.000Z\",  // Replace with actual date and time\r\n  \"deadline\": \"2024-08-31T23:59:59.000Z\",\r\n  \"qualifications\": \"Proven experience in software development, strong problem-solving skills...\",\r\n  \"responsibility\": \"Develop, test, and maintain software applications...\",\r\n  \"vacancy\": 2,\r\n  \"salary\": 120000.00,\r\n  \"category_id\": 1 \r\n\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:5001/jobs"
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1675"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"68b-zgGpPKIDu/0TfHChL/Murmt/0Fw\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Jul 2024 06:14:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Fail\",\n    \"error\": {\n        \"statusCode\": 401,\n        \"status\": \"Fail\",\n        \"isOperational\": true\n    },\n    \"message\": \"You are not login, Please login to get access this route\",\n    \"stack\": \"Error: You are not login, Please login to get access this route\\n    at I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\Middlwares\\\\isAdminMiddleware.js:13:19\\n    at asyncUtilWrap (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express-async-handler\\\\index.js:3:20)\\n    at Layer.handle [as handle_request] (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:144:13)\\n    at Route.dispatch (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:114:3)\\n    at Layer.handle [as handle_request] (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:284:15\\n    at Function.process_params (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:346:12)\\n    at next (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:280:10)\\n    at Function.handle (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:175:3)\"\n}"
+						}
+					]
+				},
+				{
+					"name": "delete job",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIwMjc2Njg5LCJleHAiOjE3Mjg5MTY2ODl9.iBNYk7Bgh2nAfVOGFZhCLlsBT5uEyeSewtagzQ406oA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5001/jobs/:jobId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"jobs",
+								":jobId"
+							],
+							"variable": [
+								{
+									"key": "jobId",
+									"value": "9",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "without auth",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIwMjc2Njg5LCJleHAiOjE3Mjg5MTY2ODl9.iBNYk7Bgh2nAfVOGFZhCLlsBT5uEyeSewtagzQ406oA",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5001/jobs/:jobId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"jobs",
+										":jobId"
+									],
+									"variable": [
+										{
+											"key": "jobId",
+											"value": "9",
+											"type": "string"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1666"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"682-T8yRZzEq5HB9aAEM4fkLJXKmmPY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Jul 2024 06:16:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Fail\",\n    \"error\": {\n        \"statusCode\": 401,\n        \"status\": \"Fail\",\n        \"isOperational\": true\n    },\n    \"message\": \"You are not login, Please login to get access this route\",\n    \"stack\": \"Error: You are not login, Please login to get access this route\\n    at I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\Middlwares\\\\isAdminMiddleware.js:13:19\\n    at asyncUtilWrap (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express-async-handler\\\\index.js:3:20)\\n    at Layer.handle [as handle_request] (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:144:13)\\n    at Route.dispatch (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:114:3)\\n    at Layer.handle [as handle_request] (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:284:15\\n    at param (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:365:14)\\n    at param (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:376:14)\\n    at Function.process_params (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:421:3)\"\n}"
+						},
+						{
+							"name": "without job id",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIwMjc2Njg5LCJleHAiOjE3Mjg5MTY2ODl9.iBNYk7Bgh2nAfVOGFZhCLlsBT5uEyeSewtagzQ406oA",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5001/jobs/:jobId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"jobs",
+										":jobId"
+									],
+									"variable": [
+										{
+											"key": "jobId",
+											"value": "",
+											"type": "string"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "936"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3a8-b4gx7QEv6fJ0zmecS+P61vZ5D+w\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Jul 2024 06:17:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Fail\",\n    \"error\": {\n        \"statusCode\": 404,\n        \"status\": \"Fail\",\n        \"isOperational\": true\n    },\n    \"message\": \"Select the job (enter job id) \",\n    \"stack\": \"Error: Select the job (enter job id) \\n    at I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\Controllers\\\\JobController.js:63:43\\n    at asyncUtilWrap (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express-async-handler\\\\index.js:3:20)\\n    at Layer.handle [as handle_request] (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:144:13)\\n    at I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\Middlwares\\\\isAdminMiddleware.js:23:39\\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\"\n}"
+						},
+						{
+							"name": "delete job",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIwMjc2Njg5LCJleHAiOjE3Mjg5MTY2ODl9.iBNYk7Bgh2nAfVOGFZhCLlsBT5uEyeSewtagzQ406oA",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5001/jobs/:jobId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"jobs",
+										":jobId"
+									],
+									"variable": [
+										{
+											"key": "jobId",
+											"value": "9",
+											"type": "string"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-jQsuEFTzs9zNSZBLz14vLAIoW8g\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Jul 2024 06:18:07 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "update job",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIwMjc2Njg5LCJleHAiOjE3Mjg5MTY2ODl9.iBNYk7Bgh2nAfVOGFZhCLlsBT5uEyeSewtagzQ406oA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \r\n  \"title\": \"ddddddddddddddd\",\r\n  \"job_type\": \"f Time\",\r\n  \"owner\": \"fsfa Doe\",  // Replace with actual owner name\r\n  \"experience\": 4443,\r\n  \"location\": \"ggg\",\r\n  \"image\": \"https://www.examplefffffffffffffffffffff.com/job_postings/software_engineer.jpg\",\r\n  \"published_on\": \"2024-07-21T17:12:00.000Z\",  // Replace with actual date and time\r\n  \"deadline\": \"2024-08-31T23:59:59.000Z\",\r\n  \"qualifications\": \"gkjskfljslkjgk experience in software development, strong problem-solving skills...\",\r\n  \"responsibility\": \"lfflfnsklnfg, test, and maintain software applications...\",\r\n  \"vacancy\": 32,\r\n  \"salary\": 120000.00,\r\n  \"category_id\": 3 \r\n\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/jobs/:jobId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"jobs",
+								":jobId"
+							],
+							"variable": [
+								{
+									"key": "jobId",
+									"value": "10",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "update job",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIwMjc2Njg5LCJleHAiOjE3Mjg5MTY2ODl9.iBNYk7Bgh2nAfVOGFZhCLlsBT5uEyeSewtagzQ406oA",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \r\n  \"title\": \"ddddddddddddddd\",\r\n  \"job_type\": \"f Time\",\r\n  \"owner\": \"fsfa Doe\",  // Replace with actual owner name\r\n  \"experience\": 4443,\r\n  \"location\": \"ggg\",\r\n  \"image\": \"https://www.examplefffffffffffffffffffff.com/job_postings/software_engineer.jpg\",\r\n  \"published_on\": \"2024-07-21T17:12:00.000Z\",  // Replace with actual date and time\r\n  \"deadline\": \"2024-08-31T23:59:59.000Z\",\r\n  \"qualifications\": \"gkjskfljslkjgk experience in software development, strong problem-solving skills...\",\r\n  \"responsibility\": \"lfflfnsklnfg, test, and maintain software applications...\",\r\n  \"vacancy\": 32,\r\n  \"salary\": 120000.00,\r\n  \"category_id\": 3 \r\n\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5001/jobs/:jobId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"jobs",
+										":jobId"
+									],
+									"variable": [
+										{
+											"key": "jobId",
+											"value": "10",
+											"type": "string"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-NXkpnMbJbaTCn/MJb6cIUCd1Sio\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Jul 2024 06:20:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Job updated successfully\"\n}"
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIwMjc2Njg5LCJleHAiOjE3Mjg5MTY2ODl9.iBNYk7Bgh2nAfVOGFZhCLlsBT5uEyeSewtagzQ406oA",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \r\n  \"title\": \"ddddddddddddddd\",\r\n  \"job_type\": \"f Time\",\r\n  \"owner\": \"fsfa Doe\",  // Replace with actual owner name\r\n  \"experience\": 4443,\r\n  \"location\": \"ggg\",\r\n  \"image\": \"https://www.examplefffffffffffffffffffff.com/job_postings/software_engineer.jpg\",\r\n  \"published_on\": \"2024-07-21T17:12:00.000Z\",  // Replace with actual date and time\r\n  \"deadline\": \"2024-08-31T23:59:59.000Z\",\r\n  \"qualifications\": \"gkjskfljslkjgk experience in software development, strong problem-solving skills...\",\r\n  \"responsibility\": \"lfflfnsklnfg, test, and maintain software applications...\",\r\n  \"vacancy\": 32,\r\n  \"salary\": 120000.00,\r\n  \"category_id\": 3 \r\n\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5001/jobs/:jobId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"jobs",
+										":jobId"
+									],
+									"variable": [
+										{
+											"key": "jobId",
+											"value": "10",
+											"type": "string"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1666"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"682-T8yRZzEq5HB9aAEM4fkLJXKmmPY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Jul 2024 06:21:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"Fail\",\n    \"error\": {\n        \"statusCode\": 401,\n        \"status\": \"Fail\",\n        \"isOperational\": true\n    },\n    \"message\": \"You are not login, Please login to get access this route\",\n    \"stack\": \"Error: You are not login, Please login to get access this route\\n    at I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\Middlwares\\\\isAdminMiddleware.js:13:19\\n    at asyncUtilWrap (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express-async-handler\\\\index.js:3:20)\\n    at Layer.handle [as handle_request] (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at next (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:144:13)\\n    at Route.dispatch (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\route.js:114:3)\\n    at Layer.handle [as handle_request] (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\layer.js:95:5)\\n    at I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:284:15\\n    at param (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:365:14)\\n    at param (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:376:14)\\n    at Function.process_params (I:\\\\Projects\\\\Job board\\\\V4 Full stack using react and nodejs\\\\server\\\\node_modules\\\\express\\\\lib\\\\router\\\\index.js:421:3)\"\n}"
+						},
+						{
+							"name": "invalid token",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "Bearer eyJhbGciOiJIUzIlNiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIwMjc2Njg5LCJleHAiOjE3Mjg5MTY2ODl9.iBNYk7Bgh2nAfVOGFZhCLlsBT5uEyeSewtagzQ406oA",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \r\n  \"title\": \"ddddddddddddddd\",\r\n  \"job_type\": \"f Time\",\r\n  \"owner\": \"fsfa Doe\",  // Replace with actual owner name\r\n  \"experience\": 4443,\r\n  \"location\": \"ggg\",\r\n  \"image\": \"https://www.examplefffffffffffffffffffff.com/job_postings/software_engineer.jpg\",\r\n  \"published_on\": \"2024-07-21T17:12:00.000Z\",  // Replace with actual date and time\r\n  \"deadline\": \"2024-08-31T23:59:59.000Z\",\r\n  \"qualifications\": \"gkjskfljslkjgk experience in software development, strong problem-solving skills...\",\r\n  \"responsibility\": \"lfflfnsklnfg, test, and maintain software applications...\",\r\n  \"vacancy\": 32,\r\n  \"salary\": 120000.00,\r\n  \"category_id\": 3 \r\n\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5001/jobs/:jobId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"jobs",
+										":jobId"
+									],
+									"variable": [
+										{
+											"key": "jobId",
+											"value": "10",
+											"type": "string"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "27"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1b-w4O8U+0Ll+sSArmfAX18RvhWpiQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Jul 2024 06:22:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid token\"\n}"
+						}
+					]
+				}
+			],
+			"description": "**CURDS Operations in** Jobs"
+		},
+		{
+			"name": "Applications",
+			"item": [
+				{
+					"name": "get user Applications",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIxNDkyMjc2LCJleHAiOjE3MzAxMzIyNzZ9.RD3DFKxlbR5BPTQEVCiDzK02WHWSc6JFf2xnUtm1OxM",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:5001/applications/userApplications"
+					},
+					"response": [
+						{
+							"name": "get user Applications",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIxNDkyMjc2LCJleHAiOjE3MzAxMzIyNzZ9.RD3DFKxlbR5BPTQEVCiDzK02WHWSc6JFf2xnUtm1OxM",
+										"type": "text"
+									}
+								],
+								"url": "http://localhost:5001/applications/userApplications"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1126"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"466-HcJOSsyBmmvSIKWxARQMkwFvsZM\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Jul 2024 06:30:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 5,\n        \"status\": \"accepted\",\n        \"userID\": 1,\n        \"jobID\": 1,\n        \"cv_link\": \"undefined\",\n        \"portfolio\": \"dddrrrrrrrrr@gmail.com\",\n        \"appliedOn\": \"2024-07-10T05:44:06.000Z\",\n        \"created_at\": \"2024-07-10T05:44:06.000Z\",\n        \"updated_at\": \"2024-07-10T05:59:15.000Z\"\n    },\n    {\n        \"id\": 6,\n        \"status\": \"pending\",\n        \"userID\": 1,\n        \"jobID\": 3,\n        \"cv_link\": \"\",\n        \"portfolio\": \"\",\n        \"appliedOn\": \"2024-07-13T07:41:20.000Z\",\n        \"created_at\": \"2024-07-13T07:41:20.000Z\",\n        \"updated_at\": \"2024-07-13T07:41:20.000Z\"\n    },\n    {\n        \"id\": 7,\n        \"status\": \"pending\",\n        \"userID\": 1,\n        \"jobID\": 2,\n        \"cv_link\": \"kkkkkkkkkkkkkk\",\n        \"portfolio\": \"jjjjjjjjjjjjjjjjjjjjjjjjjjjjjj\",\n        \"appliedOn\": \"2024-07-13T07:55:16.000Z\",\n        \"created_at\": \"2024-07-13T07:55:16.000Z\",\n        \"updated_at\": \"2024-07-13T07:55:16.000Z\"\n    },\n    {\n        \"id\": 8,\n        \"status\": \"pending\",\n        \"userID\": 1,\n        \"jobID\": 5,\n        \"cv_link\": \"JHJHVGJFVGHF\",\n        \"portfolio\": \"mono$ahmed\",\n        \"appliedOn\": \"2024-07-13T07:59:54.000Z\",\n        \"created_at\": \"2024-07-13T07:59:54.000Z\",\n        \"updated_at\": \"2024-07-13T07:59:54.000Z\"\n    },\n    {\n        \"id\": 9,\n        \"status\": \"pending\",\n        \"userID\": 1,\n        \"jobID\": 1,\n        \"cv_link\": \"JHJHVGJFVGHF\",\n        \"portfolio\": \"https://github.com/NourhanTarek1520\",\n        \"appliedOn\": \"2024-07-20T16:18:28.000Z\",\n        \"created_at\": \"2024-07-20T16:18:28.000Z\",\n        \"updated_at\": \"2024-07-20T16:18:28.000Z\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "get job applications",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIxNDkyMjc2LCJleHAiOjE3MzAxMzIyNzZ9.RD3DFKxlbR5BPTQEVCiDzK02WHWSc6JFf2xnUtm1OxM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5001/applications/job_applications/:jobId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"applications",
+								"job_applications",
+								":jobId"
+							],
+							"variable": [
+								{
+									"key": "jobId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get job applications",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIxNDkyMjc2LCJleHAiOjE3MzAxMzIyNzZ9.RD3DFKxlbR5BPTQEVCiDzK02WHWSc6JFf2xnUtm1OxM",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5001/applications/job_applications/:jobId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"applications",
+										"job_applications",
+										":jobId"
+									],
+									"variable": [
+										{
+											"key": "jobId",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "241"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"f1-H6qN+O/5jALLowsOzkwk7rwp/tI\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Jul 2024 06:30:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 7,\n        \"status\": \"pending\",\n        \"userID\": 1,\n        \"jobID\": 2,\n        \"cv_link\": \"kkkkkkkkkkkkkk\",\n        \"portfolio\": \"jjjjjjjjjjjjjjjjjjjjjjjjjjjjjj\",\n        \"appliedOn\": \"2024-07-13T07:55:16.000Z\",\n        \"created_at\": \"2024-07-13T07:55:16.000Z\",\n        \"updated_at\": \"2024-07-13T07:55:16.000Z\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "get by applicaion id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIwMjc2Njg5LCJleHAiOjE3Mjg5MTY2ODl9.iBNYk7Bgh2nAfVOGFZhCLlsBT5uEyeSewtagzQ406oA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5001/applications/:applicationId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"applications",
+								":applicationId"
+							],
+							"variable": [
+								{
+									"key": "applicationId",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get by applicaion id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIwMjc2Njg5LCJleHAiOjE3Mjg5MTY2ODl9.iBNYk7Bgh2nAfVOGFZhCLlsBT5uEyeSewtagzQ406oA",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:5001/applications/:applicationId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"applications",
+										":applicationId"
+									],
+									"variable": [
+										{
+											"key": "applicationId",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "227"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"e3-tk+VJ2IIAyDXsrL+WhrhqlC1eDM\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Jul 2024 06:32:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 5,\n    \"status\": \"accepted\",\n    \"userID\": 1,\n    \"jobID\": 1,\n    \"cv_link\": \"undefined\",\n    \"portfolio\": \"dddrrrrrrrrr@gmail.com\",\n    \"appliedOn\": \"2024-07-10T05:44:06.000Z\",\n    \"created_at\": \"2024-07-10T05:44:06.000Z\",\n    \"updated_at\": \"2024-07-10T05:59:15.000Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIwMjc2Njg5LCJleHAiOjE3Mjg5MTY2ODl9.iBNYk7Bgh2nAfVOGFZhCLlsBT5uEyeSewtagzQ406oA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"status\": \"pending\",\r\n    \"userID\": 2,\r\n    \"jobID\": 3,\r\n    \"cv_link\": \"nourhantarek157200@gmail.com\",\r\n    \"portfolio\": \"nourd00@gmail.com\"\r\n  \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/applications/:applicationId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"applications",
+								":applicationId"
+							],
+							"variable": [
+								{
+									"key": "applicationId",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "update",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIwMjc2Njg5LCJleHAiOjE3Mjg5MTY2ODl9.iBNYk7Bgh2nAfVOGFZhCLlsBT5uEyeSewtagzQ406oA",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"status\": \"pending\",\r\n    \"userID\": 2,\r\n    \"jobID\": 3,\r\n    \"cv_link\": \"nourhantarek157200@gmail.com\",\r\n    \"portfolio\": \"nourd00@gmail.com\"\r\n  \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5001/applications/:applicationId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"applications",
+										":applicationId"
+									],
+									"variable": [
+										{
+											"key": "applicationId",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"32-BMsgQ/W2fPpEqLQ/ABWWa3p8WIQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 21 Jul 2024 06:38:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Job application updated successfully\"\n}"
+						}
+					]
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIwMjc2Njg5LCJleHAiOjE3Mjg5MTY2ODl9.iBNYk7Bgh2nAfVOGFZhCLlsBT5uEyeSewtagzQ406oA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5001/applications/:applicationId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"applications",
+								":applicationId"
+							],
+							"variable": [
+								{
+									"key": "applicationId",
+									"value": "",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all applications",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cache-Control",
+								"value": "no-cache",
+								"name": "cache-control",
+								"type": "text"
+							},
+							{
+								"key": "Postman-Token",
+								"value": "<calculated when request is sent>",
+								"name": "postman-token",
+								"type": "text"
+							},
+							{
+								"key": "Host",
+								"value": "<calculated when request is sent>",
+								"name": "host",
+								"type": "text"
+							},
+							{
+								"key": "User-Agent",
+								"value": "PostmanRuntime/7.39.1",
+								"name": "user-agent",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"name": "accept",
+								"type": "text"
+							},
+							{
+								"key": "Accept-Encoding",
+								"value": "gzip, deflate, br",
+								"name": "accept-encoding",
+								"type": "text"
+							},
+							{
+								"key": "Connection",
+								"value": "keep-alive",
+								"name": "connection",
+								"type": "text"
+							},
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIwMjc2Njg5LCJleHAiOjE3Mjg5MTY2ODl9.iBNYk7Bgh2nAfVOGFZhCLlsBT5uEyeSewtagzQ406oA",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:5001/applications"
+					},
+					"response": []
+				},
+				{
+					"name": "apply for job",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsidXNlcklkIjoxfSwiaWF0IjoxNzIwMjc2Njg5LCJleHAiOjE3Mjg5MTY2ODl9.iBNYk7Bgh2nAfVOGFZhCLlsBT5uEyeSewtagzQ406oA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \r\n        \"cv_link\": \"\",\r\n        \"portfolio\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/applications/:jobId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"applications",
+								":jobId"
+							],
+							"variable": [
+								{
+									"key": "jobId",
+									"value": ""
+								}
+							]
+						},
+						"description": "apply for job using your cv link and portolio link ,  \nit will know the user by token and jobid as a params"
+					},
+					"response": [
+						{
+							"name": "applied before",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "d7f5057cdba50e9cd1f9149bfde14e63",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "protfolio",
+											"value": "http://safcai.helwan.edu.eg",
+											"type": "text"
+										},
+										{
+											"key": "cv",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": "http://localhost:5000/job/apply/1"
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "32"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"20-FyJ9pmBpq2YUi85LJwukU2NtVnA\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Nov 2023 09:33:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "\"You applay for this job before\""
+						},
+						{
+							"name": "successfully apply",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "d7f5057cdba50e9cd1f9149bfde14e63",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "protfolio",
+											"value": "http://safcai.helwan.edu.eg",
+											"type": "text"
+										},
+										{
+											"key": "cv",
+											"type": "file",
+											"src": [],
+											"disabled": true
+										}
+									]
+								},
+								"url": "http://localhost:5000/job/apply/4"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-4EWO0OxYoHEY5glunKq4lG4h5M4\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 23 Nov 2023 09:33:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "\"You Apply for this job successfully \""
+						}
+					]
+				}
+			]
+		}
+	]
+}

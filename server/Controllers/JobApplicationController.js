@@ -32,13 +32,15 @@ class JobApplicationController {
     catch (error) {return next(new ApiError(`Internal server error  , The error is : ${error}`, 500));}
   });
   static updateApplication = asyncHandler(async (req, res,next) => {
-    
+    const applicationId= req.params.applicationId  ;
+    if( applicationId == ':applicationId' )  {return next(new ApiError(`Select the application (enter applicationId) `, 404));}
+  
     try {
       const applicationToUpdate = {
         status: req.body.status,
         cv_link: req.body.cv_link,
         portfolio: req.body.portfolio,
-        id : req.params.applicationId
+        id : applicationId
       };
 // res.json(applicationToUpdate)
       const updated = await JobApplication.update(applicationToUpdate);
@@ -52,12 +54,15 @@ class JobApplicationController {
 
   });
   static deleteApplication = asyncHandler(async (req, res,next) => {
-    const applicationId = req.params.applicationId;
+   
+    const applicationId= req.params.applicationId  ;
+    if( applicationId == ':applicationId' )  {return next(new ApiError(`Select the application (enter applicationId) `, 404));}
+  
 
     try {
       const deleted = await JobApplication.delete(applicationId);
       if (deleted) {
-        res.status(200).json({ message: 'Job application deleted successfully' });
+        res.status(204).json({ message: 'Job application deleted successfully' });
       } else {
         res.status(404).json({ message: 'Job application not found' });
       }
@@ -73,32 +78,55 @@ class JobApplicationController {
   });
   static getApplicationById = asyncHandler(async (req, res,next) => {
     const applicationId = req.params.applicationId;
+   
+    if( applicationId == ':applicationId' )  {return next(new ApiError(`Select the application (enter applicationId) `, 404));}
+  
 
     try {
       const application = await JobApplication.getById(applicationId);
       if (application) {
         res.status(200).json(application);
       } else {
-        res.status(404).json({ message: 'This Job application not found' });
+        res.status(404).json({ message: 'This Job application not found ' });
       }
     }
     catch (error) {return next(new ApiError(`Internal server error  , The error is : ${error}`, 500));}
   });
   static getJobApplicaions = asyncHandler(async (req, res,next) => {
+    const jobId= req.params.jobId  ;
+    if( jobId == ':jobId' )  {return next(new ApiError(`Select the job (enter jobId) `, 404));}
+  
     try {
-   
-     const applications = JobApplication.getByJobID(req.params.jobId)
+  
+     const applications = await JobApplication.getByJobID(jobId)
      if (applications) {
-      res.status(200).json({"applications" : applications });
+      res.status(200).json( applications );
     } else {
       res.status(404).json({ message: 'This Job application not found' });
     }
     }
     catch (error) {return next(new ApiError(`Internal server error  , The error is : ${error}`, 500));}
   });
-
   static getUserApplicaions = asyncHandler(async (req, res,next) => {
-    try {
+    let authToken;
+    if ( req.headers.authorization && req.headers.authorization.startsWith('Bearer') ) {
+     authToken = req.headers.authorization.split(' ')[1]; 
+    }
+    if (!authToken) {
+      return next( new ApiError('You are not login, Please login to get access this route',401) );
+    }
+   
+   try {
+     const userId = getUserId(authToken)
+   
+     
+      const applications = await JobApplication.getByUserID(userId.userId)
+      if (applications) {
+       res.status(200).json( applications );
+    
+     } else {
+       res.status(404).json({ message: 'This Job application not found' });
+     }
      
     }
     catch (error) {return next(new ApiError(`Internal server error  , The error is : ${error}`, 500));}

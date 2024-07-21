@@ -28,7 +28,8 @@ class CompanyController{
   })
   static updateCompany =  asyncHandler( async (req, res,next) => {
     const companyId = req.params.companyId;
-
+    if( companyId == ':companyId' )  {return next(new ApiError(`Select the company (enter companyId) `, 404));}
+  
     try {
       const companyToUpdate = {
         name: req.body.name,
@@ -55,7 +56,8 @@ class CompanyController{
   })
   static deleteCompany =  asyncHandler( async (req, res,next) => {
     const companyId = req.params.companyId;
-
+    if( companyId == ':companyId' )  {return next(new ApiError(`Select the company (enter companyId) `, 404));}
+  
     try {
       const deleted = await Company.delete(companyId);
       if (deleted) {
@@ -77,7 +79,8 @@ class CompanyController{
   })
   static getSpecificCompany = asyncHandler( async (req, res,next) => {
   const companyId = req.params.companyId;
-
+  if( companyId == ':companyId' )  {return next(new ApiError(`Select the company (enter companyId) `, 404));}
+  
   try {
     const company = await Company.getById(companyId);
     if (company) {

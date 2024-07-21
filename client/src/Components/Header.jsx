@@ -50,7 +50,7 @@ function Header() {
                           {isLoggedIn ? (  
                             <>
                               <li>
-                                <Link to="/Applications">APPLICATIONS</Link>
+                                <Link to="/GetUserApplicaions">APPLICATIONS</Link>
                               </li>
                               <li>
                                 <Link to="/MySavedJobs">SAVED</Link>

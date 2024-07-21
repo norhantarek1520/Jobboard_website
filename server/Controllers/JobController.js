@@ -15,13 +15,14 @@ class JobController {
   }); 
   static getSpecificJob = asyncHandler(async (req, res,next) => {
     const jobId = req.params.jobId;
+    if( jobId == ':jobId' )  {return next(new ApiError(`Select the job (enter job id) `, 404));}
   
     try {
       const job = await Job.getById(jobId);
       if (job) {
         res.status(200).json(job);
       } else {
-        res.status(404).json({ message: 'Job not found' });
+        res.status(404).json({ message: 'Job not found for this id ' });
       }
     } catch (error) {
       return next(new ApiError(`Internal server error  , The error is : ${error}`, 500));
@@ -29,7 +30,7 @@ class JobController {
   });
   static updateJob = asyncHandler(async (req, res,next) => {
     const jobId = req.params.jobId;
-  
+    if( jobId == ':jobId' )  {return next(new ApiError(`Select the job (enter job id) `, 404));}
     try {
       const jobToUpdate = {
         title: req.body.title,
@@ -59,7 +60,7 @@ class JobController {
   });
   static deleteJob = asyncHandler(async (req, res,next) => {
     const jobId = req.params.jobId;
-  
+    if( jobId == ':jobId' )  {return next(new ApiError(`Select the job (enter job id) `, 404));}
     try {
       const deleted = await Job.delete(jobId);
       if (deleted) {

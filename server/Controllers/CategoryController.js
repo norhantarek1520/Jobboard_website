@@ -15,6 +15,8 @@ class CategoryController{
   })
   static getSpecificCategory = asyncHandler (async (req, res,next) => {
     const categoryId = req.params.categoryId;
+    if( categoryId == ':categoryId' )  {return next(new ApiError(`Select the category (enter categoryId) `, 404));}
+  
   
     try {
       const category = await Category.getById(categoryId);
@@ -30,6 +32,8 @@ class CategoryController{
   })
   static deleteCategory = asyncHandler (async (req, res,next) => {
     const categoryId = req.params.categoryId;
+    if( categoryId == ':categoryId' )  {return next(new ApiError(`Select the category (enter categoryId) `, 404));}
+  
   
     try {
       const deleted = await Category.delete(categoryId);
@@ -44,6 +48,7 @@ class CategoryController{
   })
   static updateCategory = asyncHandler (async (req, res,next) => {
     const categoryId = req.params.categoryId;
+    if( categoryId == ':categoryId' )  {return next(new ApiError(`Select the category (enter categoryId) `, 404));}
   
     try {
       const categoryToUpdate = {
@@ -65,7 +70,7 @@ class CategoryController{
   })
   static addNewCategory = asyncHandler (async (req, res,next) => {
     try {
-      //const id = uuid.v4(); // Generate a UUID
+    
       
       const newCategory = new Category(crypto.randomBytes(16), req.body.title , req.body.description, req.body.image);
      
@@ -79,14 +84,7 @@ class CategoryController{
       return next(new ApiError(`Internal server error  , The error is : ${error}`, 500));
     }
   })
-  static getJobsInSpecificCategory = asyncHandler (async()=>{
-    try {
-      
-    } catch (error) {
-      return next(new ApiError(`Internal server error  , The error is : ${error}`, 500));
-    }
-   
-  })
+
 
 }
 module.exports = CategoryController
