@@ -7,8 +7,10 @@ function JobCart() {
   const [jobs, setJobs] = useState([]);
   const [selectedJobId, setSelectedJobId] = useState(null); // State to store selected job ID
   const navigate = useNavigate(); // Initialize navigate hook
+  const [token, setToken] = useState(null);
 
   useEffect(() => {
+   
     const fetchData = async () => {
       try {
         const response = await axios.get('http://localhost:5001/jobs'); // Replace with your actual API endpoint
@@ -23,9 +25,19 @@ function JobCart() {
   }, []);
 
    const handleApplyNow = (jobId) => {
-    setSelectedJobId(jobId);
-    localStorage.setItem('jobId', jobId); // Save to localStorage (optional)
-    navigate('/ApplicationArea'); // Use navigate hook to redirect to application page
+    const storedToken = localStorage.getItem('token');
+    setToken(storedToken);
+
+    if(storedToken == null ){
+      alert("login to apply for jobs ")
+      navigate('/Login'); 
+     }
+     else { 
+      setSelectedJobId(jobId);
+      localStorage.setItem('jobId', jobId); // Save to localStorage (optional)
+      navigate('/ApplicationArea'); // Use navigate hook to redirect to application page
+     }
+   
   };
 
   const handleJobTitleClick = (jobId) => {

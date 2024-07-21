@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 
 function EditUserProfile({ userId }) {
   const [user, setUser] = useState({});
   const [oldUserData, setOldUserData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -15,7 +16,7 @@ function EditUserProfile({ userId }) {
         const headers = { 'authorization': `Bearer ${localStorage.getItem('token')}` };
         const response = await axios.get('http://localhost:5001/users/myprofile', { headers });
         setOldUserData(response.data.user);
-
+         
       } catch (error) {
         console.error(error);
       } finally {
@@ -42,6 +43,7 @@ function EditUserProfile({ userId }) {
       if (response.status === 200) {
         // Handle successful update (e.g., display success message)
         console.log('User profile updated successfully!');
+        navigate('/UserProfile'); 
       } else {
         throw new Error('Unexpected response from server');
       }
@@ -122,7 +124,7 @@ function EditUserProfile({ userId }) {
                           className="form-control"
                           id="fullName"
                           name="name"
-                          value={user.name || oldUserData.name}
+                          value={user.name }
                           onChange={handleChange}
 
                           required
@@ -147,7 +149,7 @@ function EditUserProfile({ userId }) {
                           className="form-control"
                           id="address"
                           name="address"
-                          value={user.address || oldUserData.address}
+                          value={user.address}
                           onChange={handleChange}
 
                           required
@@ -160,7 +162,7 @@ function EditUserProfile({ userId }) {
                           className="form-control"
                           id="education"
                           name="education"
-                          value={user.education || oldUserData.education}
+                          value={user.education }
                           onChange={handleChange}
 
                           required
@@ -173,7 +175,7 @@ function EditUserProfile({ userId }) {
                           className="form-control"
                           id="job_title"
                           name="job_title"
-                          value={user.job_title || oldUserData.job_title}
+                          value={user.job_title}
                           onChange={handleChange}
 
                           required
@@ -186,7 +188,7 @@ function EditUserProfile({ userId }) {
                           className="form-control"
                           id="age"
                           name="age"
-                          value={user.age || oldUserData.age}
+                          value={user.age }
                           onChange={handleChange}
 
                           required
@@ -200,7 +202,7 @@ function EditUserProfile({ userId }) {
 
                           id="phone_number"
                           name="phone_number"
-                          value={user.phone_number || oldUserData.phone_number}
+                          value={user.phone_number }
                           onChange={handleChange}
 
                           required
@@ -214,7 +216,7 @@ function EditUserProfile({ userId }) {
 
                           id="gender"
                           name="gender"
-                          value={user.gender || oldUserData.gender}
+                          value={user.gender }
                           onChange={handleChange}
 
                           required

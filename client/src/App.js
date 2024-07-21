@@ -26,6 +26,7 @@ import MySavedJobs from './Pages/Jobs/MySavedJobs'
 // 
 import Login from './Pages/Auth/Login';
 import Register from './Pages/Auth/Register';
+import AdminHome from './Pages/AdminHome';
 
 function App() {
   const [shouldReload, setShouldReload] = useState(false);
@@ -46,6 +47,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/AdminHome" element={<AdminHome />} />
           {/* general pages */}
           <Route path="/CatagoryArea" element={<CatagoryArea />} />
           <Route path="/JobsArea" element={<JobsArea />} />

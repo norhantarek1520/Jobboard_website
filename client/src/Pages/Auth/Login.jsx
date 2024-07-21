@@ -25,7 +25,9 @@ function Login() {
                 const data = await response.json();
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('role', data.role); // Add role to local storage
-                window.location.href = '/'; // Navigate to home page and reload
+                if(data.role == 'Admin') window.location.href = 'AdminHome'; 
+                else{window.location.href = '/'; }
+                
                 //navigate('/'); // Redirect on success (optional)
             } else {
                 setError('Invalid email or password');

@@ -6,14 +6,14 @@ function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation(); 
+  const location = useLocation();
 
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     const role = localStorage.getItem('role');
-    if (token !== null) {setIsLoggedIn(true); } else {setIsLoggedIn(false);}
-    if(role === "Admin") {setIsAdmin(true)} else{ setIsAdmin(false)}
+    if (token !== null) { setIsLoggedIn(true); } else { setIsLoggedIn(false); }
+    if (role === "Admin") { setIsAdmin(true) } else { setIsAdmin(false) }
   }, []);
 
   const handleLogout = () => {
@@ -44,11 +44,12 @@ function Header() {
                     <div className="main-menu d-none d-lg-block">
                       <nav>
                         <ul id="navigation">
-                          <li>
-                            <Link to="/JobsArea">EXPLORE</Link>
-                          </li>
-                          {isLoggedIn ? (  
+
+                          {isLoggedIn == true && isAdmin == false ? (
                             <>
+                              <li>
+                                <Link to="/JobsArea">EXPLORE</Link>
+                              </li>
                               <li>
                                 <Link to="/GetUserApplicaions">APPLICATIONS</Link>
                               </li>
@@ -63,41 +64,47 @@ function Header() {
                               </li>
                             </>
                           ) : null}
-                          <li className="nav-item dropdown">
-                            {isLoggedIn && isAdmin ? (
-                              <>
-                                <Link
-                                  className="nav-link dropdown-toggle"
-                                  href="#"
-                                  id="navbarDropdown"
-                                  role="button"
-                                  data-toggle="dropdown"
-                                >
-                                  Admin
-                                </Link>
-                                <div
-                                  className="dropdown-menu"
-                                  aria-labelledby="navbarDropdown"
-                                  style={{
-                                    fontWeight: "bold",
-                                    color: "#795003",
-                                    textShadow: "2px 2px 2px rgba(26, 25, 25, 0.3)",
-                                    fontFamily: "sans-serif",
-                                  }}
-                                >
-                                  <Link className="dropdown-item" to="/JobDashboard">
-                                    Jobs Dashboard
-                                  </Link>
-                                  <Link className="dropdown-item" to="/CategroyDashboard">
-                                    Categories Dashboard
-                                  </Link>
-                                  <Link className="dropdown-item" to="/CompanyDashboard">
-                                    Companies Dashboard
-                                  </Link>
-                                </div>
-                              </>
-                            ) : null}
-                          </li>
+
+                          {isLoggedIn == true && isAdmin == true ? (
+                            <>
+
+
+                              <li> <Link className="dropdown-item" to="/JobDashboard">
+                                Jobs Dashboard
+                              </Link></li>
+                              <li> <Link className="dropdown-item" to="/CategroyDashboard">
+                                Categories Dashboard
+                              </Link></li>
+                              <li> <Link className="dropdown-item" to="/CompanyDashboard">
+                                Companies Dashboard
+                              </Link></li>
+                              <li>
+                                <Link to="/UserProfile">My profile</Link>
+                              </li>
+                              <li>
+                                <Link to="/EditUserProfile">Edit Profile</Link>
+                              </li>
+
+                            </>
+                          ) : null}
+
+                          {isLoggedIn == false && isAdmin == false ? (
+                            <>
+                              <li>
+                                <Link to="/JobsArea">EXPLORE</Link>
+                              </li>
+                              <li>
+                                <Link to="/CompaniesArea">Companies Area</Link>
+                              </li>
+                              <li>
+                                <Link to="/CatagoryArea">Catagories Area</Link>
+                              </li>
+                              
+                            
+
+                            </>
+                          ) : null}
+
                         </ul>
                       </nav>
                     </div>
