@@ -54,7 +54,7 @@ Once you've found a few jobs you're interested in, you can easily apply online o
 | phone_number | VARCHAR(20) |
 
 ## jobs
-    | Column Name | SQL Type |
+| Column Name | SQL Type |
 | ---| ---|
 | id | int AUTO_INCREMENT PRIMARY KEY |
 | title | VARCHAR(100) NOT NULL |
@@ -70,15 +70,15 @@ Once you've found a few jobs you're interested in, you can easily apply online o
 | vacancy | INT DEFAULT 1, salary DOUBLE |
 | category_id | INT NOT NULL |
 | FOREIGN KEY(category_id) | REFERENCES categories(id) |
+
 ** Foreign Key:**
 * `category_id`(assuming this column exists) references the `id` column in the`categories` table(foreign key constraint named`category_id`).
 ** Note:**
 * Ensure you have a `categories` table with a`title` column before using this foreign key constraint.
 
-
-        ## jobapplications
-    | Column Name | SQL Type |
-        | ---| ---|
+ ## jobapplications
+| Column Name | SQL Type |
+| ---| ---|
 | id | INT AUTO_INCREMENT PRIMARY KEY |
 | status | ENUM('pending', 'rejected', 'accepted') DEFAULT 'pending' |
 | userID | INT NOT NULL |
@@ -90,9 +90,9 @@ Once you've found a few jobs you're interested in, you can easily apply online o
 | FOREIGN KEY(jobID) | REFERENCES jobs(id) |
 
 
-         ## company_info
-    | Column Name | SQL Type |
-        | ---| ---|
+## company_info
+| Column Name | SQL Type |
+| ---| ---|
 | id | int AUTO_INCREMENT PRIMARY KEY |
 | name | VARCHAR(255) NOT NULL |
 | website | VARCHAR(255) |
@@ -105,9 +105,9 @@ Once you've found a few jobs you're interested in, you can easily apply online o
 
 
 
-        ## categories
-    | Column Name | SQL Type |
-        | ---| ---|
+## categories
+| Column Name | SQL Type |
+| ---| ---|
 | id | int AUTO_INCREMENT PRIMARY KEY |
 | title | VARCHAR(70) UNIQUE NOT NULL |
 | image | varchar(255) |
